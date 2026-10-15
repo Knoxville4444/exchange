@@ -10,7 +10,11 @@ const state = {
   sourceDocCache: new Map(),
   nextId: 1,
   collapsedGroups: new Set(),
+  favorites: [],
 };
+
+const FAVORITES_STORAGE_KEY = 'scanhelper-favoriten';
+const FAVORITES_FILENAME = 'favoriten.json';
 
 let DOKTYPEN = {};
 let DOKUMENTKATEGORIEN = [];
@@ -71,13 +75,16 @@ function detectGroup(relPath) {
 }
 
 async function handleDirPicked(fileList) {
-  const files = Array.from(fileList).filter((f) => f.name.toLowerCase().endsWith('.pdf'));
-  state.sourceFiles = files.map((file) => {
-    const relPath = file.webkitRelativePath || file.name;
-    const group = detectGroup(relPath);
+  const allFiles = Array.from(fileList);
+  const pdfFiles = allFiles.filter((f) => f.name.toLowerCase().endsWith('.pdf'));
+  state.sourceFiles = pdfFiles.map((file) => {
+    const fullRelPath = file.webkitRelativePath || file.name;
+    const group = detectGroup(fullRelPath);
+    const relPath = fullRelPath.split('/').slice(1).join('/') || fullRelPath;
     return {
       id: 'f' + state.nextId++,
       file,
+      relPath,
       group: group.key,
       groupLabel: group.label,
       name: file.name.replace(/\.pdf$/i, ''),
@@ -87,6 +94,7 @@ async function handleDirPicked(fileList) {
     };
   });
   await renderQuellen();
+  await loadFavoritesFromDirectory(allFiles);
 }
 
 async function loadPdfJsDoc(sf) {
@@ -176,16 +184,16 @@ async function renderQuellen() {
   }
 }
 
-async function addWholePdf(sf, atIndex) {
+async function createSeiteStapelItem(sf) {
   const doc = await loadPdfJsDoc(sf);
   const item = {
     id: 'it' + state.nextId++,
     type: 'seite-stapel',
     source: { kind: 'file', fileId: sf.id, pageCount: doc.numPages },
+    relPath: sf.relPath,
     label: sf.name,
     thumbDataUrl: sf.thumbDataUrl || null,
   };
-  insertItems([item], atIndex);
   if (!item.thumbDataUrl) {
     renderPageToDataUrl(doc, 1, 100)
       .then((dataUrl) => {
@@ -194,6 +202,12 @@ async function addWholePdf(sf, atIndex) {
       })
       .catch((err) => console.error(err));
   }
+  return item;
+}
+
+async function addWholePdf(sf, atIndex) {
+  const item = await createSeiteStapelItem(sf);
+  insertItems([item], atIndex);
 }
 
 function updateCardThumb(item) {
@@ -274,6 +288,173 @@ function moveItem(id, beforeId) {
   renderTree();
 }
 
+// ---------- Favoriten ----------
+
+function itemsToInstructions(items) {
+  const instructions = [];
+  let i = 0;
+  while (i < items.length) {
+    const item = items[i];
+    if (item.type === 'paket-trenn') {
+      instructions.push({ type: 'paket-trenn', kategorie: item.kategorie });
+      i++;
+    } else if (item.type === 'dokument-trenn') {
+      instructions.push({ type: 'dokument-trenn', doktyp: item.doktyp });
+      i++;
+    } else if (item.type === 'zbh') {
+      instructions.push({ type: 'zbh' });
+      i++;
+    } else if (item.type === 'seite-stapel') {
+      instructions.push({ type: 'datei', relPath: item.relPath, label: item.label });
+      i++;
+    } else if (item.type === 'seite' && item.source && item.source.kind === 'generated') {
+      const kind = item.source.dummy.kind;
+      let count = 0;
+      while (
+        i < items.length &&
+        items[i].type === 'seite' &&
+        items[i].source &&
+        items[i].source.kind === 'generated' &&
+        items[i].source.dummy.kind === kind
+      ) {
+        count++;
+        i++;
+      }
+      instructions.push({ type: 'seite-generiert', kind, anzahl: count });
+    } else {
+      i++;
+    }
+  }
+  return instructions;
+}
+
+async function instructionsToItems(instructions) {
+  const items = [];
+  const missing = [];
+  for (const instr of instructions) {
+    if (instr.type === 'paket-trenn') {
+      items.push(makePaketTrennItem(instr.kategorie));
+    } else if (instr.type === 'dokument-trenn') {
+      const fsKey = instr.doktyp ? instr.doktyp.fachsystem : null;
+      items.push(makeDokumentTrennItem(fsKey, instr.doktyp ? instr.doktyp.nr : null));
+    } else if (instr.type === 'zbh') {
+      items.push(makeZbhItem());
+    } else if (instr.type === 'seite-generiert') {
+      items.push(...makeDummySeiten(instr.kind, instr.anzahl));
+    } else if (instr.type === 'datei') {
+      const sf = state.sourceFiles.find((s) => s.relPath === instr.relPath);
+      if (sf) {
+        items.push(await createSeiteStapelItem(sf));
+      } else {
+        missing.push(instr.relPath);
+        items.push({ id: 'it' + state.nextId++, type: 'fehlend', relPath: instr.relPath, label: instr.label || instr.relPath });
+      }
+    }
+  }
+  return { items, missing };
+}
+
+function loadFavoritesFromStorage() {
+  try {
+    const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
+    if (raw) state.favorites = JSON.parse(raw);
+  } catch (err) {
+    console.error('Favoriten aus localStorage konnten nicht geladen werden', err);
+  }
+}
+
+function saveFavoritesToStorage() {
+  try {
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(state.favorites));
+  } catch (err) {
+    console.error('Favoriten konnten nicht in localStorage gespeichert werden', err);
+  }
+}
+
+async function loadFavoritesFromDirectory(allFiles) {
+  const favFile = allFiles.find((f) => {
+    const rel = f.webkitRelativePath || f.name;
+    const segments = rel.split('/');
+    return segments.length === 2 && segments[1] === FAVORITES_FILENAME;
+  });
+  if (!favFile) return;
+  try {
+    const text = await favFile.text();
+    const fromFile = JSON.parse(text);
+    const existingNames = new Set(state.favorites.map((f) => f.name));
+    for (const fav of fromFile) {
+      if (!existingNames.has(fav.name)) {
+        state.favorites.push(fav);
+        existingNames.add(fav.name);
+      }
+    }
+    renderFavoriten();
+  } catch (err) {
+    console.error('favoriten.json im Verzeichnis konnte nicht gelesen werden', err);
+  }
+}
+
+async function applyFavorite(fav) {
+  const { items, missing } = await instructionsToItems(fav.items);
+  insertItems(items);
+  if (missing.length) {
+    alert(`Favorit "${fav.name}" angewendet, aber ${missing.length} Datei(en) fehlen im gewählten Verzeichnis:\n` + missing.join('\n'));
+  }
+}
+
+function saveCurrentAsFavorite(name) {
+  const instructions = itemsToInstructions(state.items);
+  state.favorites = state.favorites.filter((f) => f.name !== name);
+  state.favorites.push({ name, items: instructions });
+  saveFavoritesToStorage();
+  renderFavoriten();
+}
+
+function deleteFavorite(name) {
+  state.favorites = state.favorites.filter((f) => f.name !== name);
+  saveFavoritesToStorage();
+  renderFavoriten();
+}
+
+function exportFavoritesFile() {
+  const blob = new Blob([JSON.stringify(state.favorites, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = FAVORITES_FILENAME;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+}
+
+function renderFavoriten() {
+  const list = document.getElementById('favoritenList');
+  if (!list) return;
+  list.innerHTML = '';
+  if (!state.favorites.length) {
+    list.innerHTML = '<div class="hint">Noch keine Favoriten.</div>';
+    return;
+  }
+  for (const fav of state.favorites) {
+    const row = document.createElement('div');
+    row.className = 'favorit-row';
+    const info = document.createElement('div');
+    info.className = 'favorit-info';
+    info.innerHTML = `<div class="favorit-name">${escapeHtml(fav.name)}</div><div class="favorit-meta">${fav.items.length} Elemente</div>`;
+    row.appendChild(info);
+    const applyBtn = document.createElement('button');
+    applyBtn.textContent = 'Anwenden';
+    applyBtn.addEventListener('click', () => applyFavorite(fav));
+    row.appendChild(applyBtn);
+    const delBtn = document.createElement('div');
+    delBtn.className = 'del-btn favorit-del';
+    delBtn.textContent = '×';
+    delBtn.title = 'Favorit löschen';
+    delBtn.addEventListener('click', () => deleteFavorite(fav.name));
+    row.appendChild(delBtn);
+    list.appendChild(row);
+  }
+}
+
 // ---------- Streifen (Strip) ----------
 
 function makeCard(item) {
@@ -304,6 +485,10 @@ function makeCard(item) {
       badge.textContent = item.source.pageCount;
       card.appendChild(badge);
     }
+  } else if (item.type === 'fehlend') {
+    card.classList.add('sheet-fehlend');
+    card.textContent = 'Fehlt:\n' + (item.label || item.relPath);
+    card.title = `Datei nicht im gewählten Verzeichnis gefunden: ${item.relPath}`;
   }
 
   const del = document.createElement('div');
@@ -467,8 +652,13 @@ function renderStrip() {
   strip.appendChild(endZone);
 
   document.getElementById('stripEmpty').style.display = state.items.length ? 'none' : 'block';
-  const totalPages = state.items.reduce((sum, it) => sum + (it.type === 'seite-stapel' ? it.source.pageCount : 1), 0);
-  setStatus(totalPages ? `${totalPages} Seite(n)` : '');
+  const totalPages = state.items.reduce((sum, it) => {
+    if (it.type === 'seite-stapel') return sum + it.source.pageCount;
+    if (it.type === 'fehlend') return sum;
+    return sum + 1;
+  }, 0);
+  const missingCount = state.items.filter((it) => it.type === 'fehlend').length;
+  setStatus(totalPages ? `${totalPages} Seite(n)` + (missingCount ? `, ${missingCount} fehlend` : '') : '');
 }
 
 // ---------- Gliederung (Baum) ----------
@@ -548,6 +738,9 @@ function renderTree() {
       ensureLeadingPaket();
       ensureLeadingDok();
       dokCount += item.source.pageCount;
+    } else if (item.type === 'fehlend') {
+      ensureLeadingPaket();
+      ensureLeadingDok();
     }
   }
   flushDok();
@@ -565,10 +758,19 @@ async function exportPdf() {
     alert('Noch keine Seiten im Dokument.');
     return null;
   }
+  const missing = state.items.filter((it) => it.type === 'fehlend');
+  if (missing.length) {
+    const ok = confirm(
+      `${missing.length} Datei(en) fehlen im gewählten Verzeichnis und werden im PDF übersprungen:\n` +
+        missing.map((m) => m.relPath).join('\n') +
+        '\n\nTrotzdem erzeugen?'
+    );
+    if (!ok) return null;
+  }
   setStatus('Erzeuge PDF…');
   try {
     const bytes = await PdfGen.buildFinalPdf(state.items, loadSourceDocForLib);
-    setStatus(`${state.items.length} Seite(n)`);
+    renderStrip();
     return new Blob([bytes], { type: 'application/pdf' });
   } catch (err) {
     console.error(err);
@@ -598,42 +800,58 @@ document.getElementById('btnPrint').addEventListener('click', async () => {
 
 // ---------- Generator-Buttons ----------
 
-document.querySelector('[data-gen="paket"]').addEventListener('click', () => {
-  const kategorie = document.getElementById('genPaketKategorie').value || null;
-  insertItems([{ id: 'it' + state.nextId++, type: 'paket-trenn', kategorie }]);
-});
+function makePaketTrennItem(kategorie) {
+  return { id: 'it' + state.nextId++, type: 'paket-trenn', kategorie: kategorie || null };
+}
 
-document.querySelector('[data-gen="dokument"]').addEventListener('click', () => {
-  const nr = document.getElementById('genDokTyp').value;
-  const fsKey = document.getElementById('genDokFachsystem').value;
+function makeDokumentTrennItem(fsKey, nr) {
   let doktyp = null;
   if (nr) {
-    const entry = (DOKTYPEN[fsKey] || []).find((d) => String(d.nr) === nr);
-    if (entry) doktyp = { nr: entry.nr, name: entry.name };
+    const entry = (DOKTYPEN[fsKey] || []).find((d) => String(d.nr) === String(nr));
+    if (entry) doktyp = { nr: entry.nr, name: entry.name, fachsystem: fsKey };
   }
-  insertItems([{ id: 'it' + state.nextId++, type: 'dokument-trenn', doktyp }]);
-});
+  return { id: 'it' + state.nextId++, type: 'dokument-trenn', doktyp };
+}
 
-document.querySelector('[data-gen="zbh"]').addEventListener('click', () => {
-  insertItems([{ id: 'it' + state.nextId++, type: 'zbh' }]);
-});
+function makeZbhItem() {
+  return { id: 'it' + state.nextId++, type: 'zbh' };
+}
 
-document.querySelector('[data-gen="seite"]').addEventListener('click', () => {
-  const anzahl = Math.max(1, Math.min(50, parseInt(document.getElementById('genSeiteAnzahl').value, 10) || 1));
-  const kind = document.getElementById('genSeiteInhalt').value;
+function makeDummySeiten(kind, anzahl) {
+  const n = Math.max(1, Math.min(50, anzahl || 1));
   const newItems = [];
-  for (let i = 1; i <= anzahl; i++) {
+  for (let i = 1; i <= n; i++) {
     newItems.push({
       id: 'it' + state.nextId++,
       type: 'seite',
       source: {
         kind: 'generated',
-        dummy: { kind, pageLabel: kind === 'stempel' ? `Seite ${i} von ${anzahl}` : `Dummy-Seite ${i}/${anzahl}` },
+        dummy: { kind, pageLabel: kind === 'stempel' ? `Seite ${i} von ${n}` : `Dummy-Seite ${i}/${n}` },
       },
-      label: `Dummy ${i}/${anzahl}`,
+      label: `Dummy ${i}/${n}`,
     });
   }
-  insertItems(newItems);
+  return newItems;
+}
+
+document.querySelector('[data-gen="paket"]').addEventListener('click', () => {
+  insertItems([makePaketTrennItem(document.getElementById('genPaketKategorie').value)]);
+});
+
+document.querySelector('[data-gen="dokument"]').addEventListener('click', () => {
+  const fsKey = document.getElementById('genDokFachsystem').value;
+  const nr = document.getElementById('genDokTyp').value;
+  insertItems([makeDokumentTrennItem(fsKey, nr)]);
+});
+
+document.querySelector('[data-gen="zbh"]').addEventListener('click', () => {
+  insertItems([makeZbhItem()]);
+});
+
+document.querySelector('[data-gen="seite"]').addEventListener('click', () => {
+  const anzahl = parseInt(document.getElementById('genSeiteAnzahl').value, 10);
+  const kind = document.getElementById('genSeiteInhalt').value;
+  insertItems(makeDummySeiten(kind, anzahl));
 });
 
 // ---------- Tabs ----------
@@ -668,11 +886,38 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') helpOverlay.classList.remove('open');
 });
 
+// ---------- Favoriten-Buttons ----------
+
+document.getElementById('btnFavSave').addEventListener('click', () => {
+  const nameInput = document.getElementById('favName');
+  const name = nameInput.value.trim();
+  if (!name) {
+    alert('Bitte einen Namen für den Favoriten eingeben.');
+    return;
+  }
+  if (!state.items.length) {
+    alert('Noch keine Seiten im Dokument.');
+    return;
+  }
+  saveCurrentAsFavorite(name);
+  nameInput.value = '';
+});
+
+document.getElementById('btnFavExport').addEventListener('click', () => {
+  if (!state.favorites.length) {
+    alert('Noch keine Favoriten vorhanden.');
+    return;
+  }
+  exportFavoritesFile();
+});
+
 // ---------- Init ----------
 
 (async function init() {
   loadData();
   populateGeneratorForms();
+  loadFavoritesFromStorage();
+  renderFavoriten();
   renderStrip();
   renderTree();
 })();

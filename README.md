@@ -11,22 +11,31 @@ zusammengestellt und als PDF heruntergeladen oder gedruckt.
 keine Admin-Rechte nötig). Empfohlen: **Firefox**. Chrome funktioniert ebenfalls.
 
 1. **Quellen**-Tab: "Verzeichnis wählen…" klickt sich zu einem Ordner mit PDF-Formularen
-   durch. Dateien werden automatisch nach Schutzrecht gruppiert (Marke, Patente /
-   Gebrauchsmuster, Design, Zahlungsverkehr – anhand der Ordnernamen `Marken`,
-   `Patente`, `Gebrauchsmuster`, `Designs`, `Zahlungsverkehr`). Klick oder Drag auf eine
-   Karte fügt das ganze PDF als Seitenstapel in den Streifen ein.
+   durch. Dateien werden automatisch nach dem Namen ihres direkten Unterverzeichnisses
+   gruppiert (eine Ebene, frei benennbar – keine feste Liste). Dateien direkt im
+   Wurzelverzeichnis landen unter "Sonstige". Gruppentitel klappen per Klick auf/zu.
+   Klick oder Drag auf eine Karte fügt das ganze PDF als Seitenstapel in den Streifen ein.
 2. **Generator**-Tab: erzeugt auf Zuruf
    - **Pakettrennblatt** (optional mit Dokumentenkategorie)
    - **Dokumenttrennblatt** (optional mit Dokumenttyp, gefiltert nach Fachsystem)
    - **ZBH** (statisches Zusatzbehandlung-Trennblatt, keine Eingaben)
    - **Dummy-Seite(n)** (Seitenzahl-Stempel oder Lorem-Text, frei wählbare Anzahl)
-3. Der **Streifen** in der Mitte wächst horizontal und gruppiert alles automatisch
+3. **Favoriten**-Tab: speichert die aktuelle Zusammenstellung als wiederverwendbare
+   Anweisungsfolge (Trennblätter, Dokumenttypen, Dateiverweise) – **nicht** das fertige
+   PDF, damit beim erneuten Anwenden immer mit den aktuell im Verzeichnis liegenden
+   Dateien neu erzeugt wird. Fehlt eine referenzierte Datei, erscheint im Streifen eine
+   rote "Fehlt: …"-Karte statt sie stillschweigend wegzulassen. Favoriten werden lokal im
+   Browser gespeichert (`localStorage`) und können zusätzlich als `favoriten.json`
+   exportiert werden – liegt diese Datei im gewählten Formular-Verzeichnis, wird sie bei
+   jeder Verzeichnis-Auswahl automatisch mit eingelesen (keine Doppeleinträge bei
+   gleichem Namen).
+4. Der **Streifen** in der Mitte wächst horizontal und gruppiert alles automatisch
    sichtbar nach Paket/Dokument – auch lose Seiten vor dem ersten Pakettrennblatt
    werden als "Paket (unbenannt)" dargestellt. Karten lassen sich per Drag&Drop
    umsortieren; Hover zeigt ein × zum Löschen einzelner Seiten oder ganzer
    Paket-/Dokument-Gruppen.
-4. Die **Gliederung** links zeigt dieselbe Struktur als Baum zur schnellen Navigation.
-5. **Download** lädt das fertige PDF herunter, **Drucken** öffnet es in einem neuen Tab
+5. Die **Gliederung** links zeigt dieselbe Struktur als Baum zur schnellen Navigation.
+6. **Download** lädt das fertige PDF herunter, **Drucken** öffnet es in einem neuen Tab
    zum Ausdrucken über den Browser (z. B. als PDF-Drucker).
 
 ## Struktur

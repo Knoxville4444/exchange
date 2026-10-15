@@ -17,6 +17,8 @@
   --purple-bg: #eeedfe;
   --coral: #993c1d;
   --coral-bg: #faece7;
+  --red: #a32d2d;
+  --red-bg: #fcebeb;
   --radius: 6px;
 }
 
@@ -382,3 +384,35 @@ label {
 .modal-body { padding: 16px 18px; font-size: 13px; line-height: 1.6; }
 .modal-body ol { margin: 0; padding-left: 20px; }
 .modal-body li { margin-bottom: 12px; }
+
+.favorit-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 0.5px solid var(--border);
+  position: relative;
+}
+.favorit-row:last-child { border-bottom: none; }
+.favorit-info { flex: 1; min-width: 0; }
+.favorit-name {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.favorit-meta { font-size: 10px; color: var(--text-muted); }
+.favorit-row button { font-size: 11px; padding: 4px 8px; flex-shrink: 0; }
+.favorit-del {
+  position: static;
+  display: block;
+  flex-shrink: 0;
+}
+
+.item-card.sheet-fehlend {
+  background: var(--red-bg, #fcebeb);
+  border-color: var(--red, #c0392b);
+  color: var(--red, #c0392b);
+  font-weight: 500;
+  white-space: pre-line;
+}

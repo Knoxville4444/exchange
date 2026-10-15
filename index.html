@@ -27,13 +27,19 @@
     <div class="modal-body">
       <ol>
         <li><strong>Quellen</strong>: "Verzeichnis wählen…" wählt einen Ordner mit PDF-Formularen.
-          Dateien werden automatisch nach Schutzrecht gruppiert (Marke, Patente / Gebrauchsmuster,
-          Design, Zahlungsverkehr &ndash; anhand der Ordnernamen). Klick oder Drag auf eine Karte
-          fügt das ganze PDF als Seitenstapel in den Streifen ein. Gruppentitel klappen auf/zu.</li>
+          Dateien werden automatisch nach dem Namen ihres direkten Unterverzeichnisses gruppiert
+          (eine Ebene, frei benennbar); Dateien direkt im Wurzelverzeichnis landen unter "Sonstige".
+          Klick oder Drag auf eine Karte fügt das ganze PDF als Seitenstapel in den Streifen ein.
+          Gruppentitel klappen auf/zu.</li>
         <li><strong>Generator</strong>: erzeugt auf Zuruf ein Pakettrennblatt (optional mit
           Dokumentenkategorie), ein Dokumenttrennblatt (optional mit Dokumenttyp, gefiltert nach
           Fachsystem), ein statisches ZBH-Blatt oder Dummy-Seiten (Seitenzahl-Stempel oder
           Lorem-Text).</li>
+        <li><strong>Favoriten</strong>: speichert die aktuelle Zusammenstellung als Anweisungsfolge
+          (nicht das fertige PDF) &ndash; beim Anwenden wird mit den aktuell geladenen Dateien neu
+          erzeugt. Fehlt eine Datei, erscheint eine rote "Fehlt: …"-Karte. Als
+          <code>favoriten.json</code> exportierbar; liegt diese Datei im Formular-Verzeichnis, wird
+          sie automatisch mit eingelesen.</li>
         <li>Der <strong>Streifen</strong> in der Mitte wächst horizontal und gruppiert alles
           sichtbar nach Paket/Dokument &ndash; auch lose Seiten vor dem ersten Pakettrennblatt
           erscheinen als "Paket (unbenannt)". Karten per Drag&amp;Drop umsortieren; Hover zeigt ein
@@ -66,6 +72,7 @@
     <div class="tabs">
       <button class="tab active" data-tab="quellen">Quellen</button>
       <button class="tab" data-tab="generator">Generator</button>
+      <button class="tab" data-tab="favoriten">Favoriten</button>
     </div>
 
     <div id="tabQuellen" class="tab-content active">
@@ -114,6 +121,30 @@
         <button data-gen="seite" class="wide-btn">Einf&uuml;gen</button>
       </div>
 
+    </div>
+
+    <div id="tabFavoriten" class="tab-content">
+      <div class="gen-section">
+        <h3>Aktuelles als Favorit speichern</h3>
+        <label>Name
+          <input type="text" id="favName" placeholder="z. B. Standard-Nachgang Marke">
+        </label>
+        <button id="btnFavSave" class="wide-btn">Speichern</button>
+        <p class="hint">Speichert nur die Anweisungen (Trennblätter, Dokumenttypen,
+          Dateiverweise), nicht das fertige PDF – wird bei "Anwenden" mit den aktuell
+          geladenen Dateien neu erzeugt.</p>
+      </div>
+      <div class="gen-section">
+        <h3>Gespeicherte Favoriten</h3>
+        <div id="favoritenList"></div>
+      </div>
+      <div class="gen-section">
+        <h3>Mit Kollegen teilen</h3>
+        <p class="hint">Exportiert alle Favoriten als <code>favoriten.json</code>. Datei
+          ins Formular-Verzeichnis legen &ndash; sie wird dann bei jeder
+          Verzeichnis-Auswahl automatisch mit eingelesen.</p>
+        <button id="btnFavExport" class="wide-btn">Als Datei exportieren</button>
+      </div>
     </div>
   </aside>
 
