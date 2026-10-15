@@ -234,7 +234,7 @@ function applyScannedLook(sourceCanvas) {
   const w = sourceCanvas.width;
   const h = sourceCanvas.height;
 
-  const angleDeg = Math.random() * 2.4 - 1.2; // +/- 1.2 Grad, Scanner-Schräglage bleibt im üblichen Toleranzbereich für QR-Decoder
+  const angleDeg = Math.random() * 6 - 3; // +/- 3 Grad
   const rotated = document.createElement('canvas');
   rotated.width = w;
   rotated.height = h;
@@ -285,7 +285,36 @@ function applyScannedLook(sourceCanvas) {
   fctx.fillRect(0, 0, w, h);
   fctx.globalCompositeOperation = 'source-over';
 
+  addDustSpecks(fctx, w, h);
+
   return filtered;
+}
+
+function addDustSpecks(ctx, w, h) {
+  // einzelne, unregelmäßig verteilte Staubkörner/Kratzer wie auf einer Scannerlinse/-glasscheibe
+  const count = Math.round((w * h) / 28000);
+  for (let i = 0; i < count; i++) {
+    const x = Math.random() * w;
+    const y = Math.random() * h;
+    const r = 0.6 + Math.random() * Math.random() * 3.5; // meist winzig, selten größer
+    const alpha = 0.2 + Math.random() * 0.45;
+    const dark = Math.random() < 0.82;
+    ctx.beginPath();
+    if (Math.random() < 0.15) {
+      // vereinzelt ein kleiner Kratzer statt eines runden Korns
+      const len = 2 + Math.random() * 6;
+      const ang = Math.random() * Math.PI * 2;
+      ctx.strokeStyle = `rgba(50,50,50,${alpha})`;
+      ctx.lineWidth = 0.6;
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(ang) * len, y + Math.sin(ang) * len);
+      ctx.stroke();
+    } else {
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = dark ? `rgba(35,35,35,${alpha})` : `rgba(255,255,255,${alpha * 0.8})`;
+      ctx.fill();
+    }
+  }
 }
 
 function dataUrlToBytes(dataUrl) {
