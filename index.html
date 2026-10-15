@@ -12,10 +12,41 @@
   <span class="title">Testdokument-Generator</span>
   <div class="actions">
     <span class="status" id="status"></span>
+    <button id="btnHelp" title="Hilfe">?</button>
     <button id="btnDownload"><i class="icon">&#8595;</i> Download</button>
     <button id="btnPrint"><i class="icon">&#9113;</i> Drucken</button>
   </div>
 </header>
+
+<div class="modal-overlay" id="helpOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <span>Hilfe</span>
+      <button id="btnHelpClose" class="modal-close" title="Schließen">&times;</button>
+    </div>
+    <div class="modal-body">
+      <ol>
+        <li><strong>Quellen</strong>: "Verzeichnis wählen…" wählt einen Ordner mit PDF-Formularen.
+          Dateien werden automatisch nach Schutzrecht gruppiert (Marke, Patente / Gebrauchsmuster,
+          Design, Zahlungsverkehr &ndash; anhand der Ordnernamen). Klick oder Drag auf eine Karte
+          fügt das ganze PDF als Seitenstapel in den Streifen ein. Gruppentitel klappen auf/zu.</li>
+        <li><strong>Generator</strong>: erzeugt auf Zuruf ein Pakettrennblatt (optional mit
+          Dokumentenkategorie), ein Dokumenttrennblatt (optional mit Dokumenttyp, gefiltert nach
+          Fachsystem), ein statisches ZBH-Blatt oder Dummy-Seiten (Seitenzahl-Stempel oder
+          Lorem-Text).</li>
+        <li>Der <strong>Streifen</strong> in der Mitte wächst horizontal und gruppiert alles
+          sichtbar nach Paket/Dokument &ndash; auch lose Seiten vor dem ersten Pakettrennblatt
+          erscheinen als "Paket (unbenannt)". Karten per Drag&amp;Drop umsortieren; Hover zeigt ein
+          × zum Löschen einzelner Seiten oder ganzer Paket-/Dokument-Gruppen. Klick auf eine Karte
+          setzt die Einfügeposition für Quellen/Generator.</li>
+        <li>Die <strong>Gliederung</strong> links zeigt dieselbe Struktur als Baum &ndash; Klick
+          springt zur jeweiligen Stelle im Streifen.</li>
+        <li><strong>Download</strong> lädt das fertige PDF herunter, <strong>Drucken</strong> öffnet
+          es in einem neuen Tab zum Ausdrucken über den Browser (z. B. als PDF-Drucker).</li>
+      </ol>
+    </div>
+  </div>
+</div>
 
 <div class="main">
 

@@ -653,6 +653,18 @@ document.getElementById('dirInput').addEventListener('change', (e) => {
   handleDirPicked(e.target.files);
 });
 
+// ---------- Hilfe ----------
+
+const helpOverlay = document.getElementById('helpOverlay');
+document.getElementById('btnHelp').addEventListener('click', () => helpOverlay.classList.add('open'));
+document.getElementById('btnHelpClose').addEventListener('click', () => helpOverlay.classList.remove('open'));
+helpOverlay.addEventListener('click', (e) => {
+  if (e.target === helpOverlay) helpOverlay.classList.remove('open');
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') helpOverlay.classList.remove('open');
+});
+
 // ---------- Init ----------
 
 (async function init() {
