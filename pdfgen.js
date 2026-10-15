@@ -234,7 +234,7 @@ function applyScannedLook(sourceCanvas) {
   const w = sourceCanvas.width;
   const h = sourceCanvas.height;
 
-  const angleDeg = Math.random() * 1.0 - 0.5; // +/- 0.5 Grad, QR-/Patch-Codes bleiben lesbar
+  const angleDeg = Math.random() * 2.4 - 1.2; // +/- 1.2 Grad, Scanner-Schräglage bleibt im üblichen Toleranzbereich für QR-Decoder
   const rotated = document.createElement('canvas');
   rotated.width = w;
   rotated.height = h;
@@ -249,15 +249,15 @@ function applyScannedLook(sourceCanvas) {
   filtered.width = w;
   filtered.height = h;
   const fctx = filtered.getContext('2d');
-  const brightness = 0.97 + Math.random() * 0.08;
-  const contrast = 1.04 + Math.random() * 0.08;
-  fctx.filter = `blur(0.35px) brightness(${brightness}) contrast(${contrast}) saturate(0.92)`;
+  const brightness = 0.93 + Math.random() * 0.1;
+  const contrast = 1.08 + Math.random() * 0.14;
+  fctx.filter = `blur(0.6px) brightness(${brightness}) contrast(${contrast}) saturate(0.85)`;
   fctx.drawImage(rotated, 0, 0);
   fctx.filter = 'none';
 
   const imgData = fctx.getImageData(0, 0, w, h);
   const data = imgData.data;
-  const noiseAmount = 9;
+  const noiseAmount = 22;
   for (let i = 0; i < data.length; i += 4) {
     const n = (Math.random() - 0.5) * noiseAmount;
     data[i] = clamp255(data[i] + n);
@@ -266,10 +266,21 @@ function applyScannedLook(sourceCanvas) {
   }
   fctx.putImageData(imgData, 0, 0);
 
-  const grad = fctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.35, w / 2, h / 2, Math.max(w, h) * 0.72);
-  grad.addColorStop(0, 'rgba(0,0,0,0)');
-  grad.addColorStop(1, 'rgba(0,0,0,0.1)');
+  // ungleichmäßige Ausleuchtung: leichter Helligkeitsverlauf über die Seite
+  const lightAngle = Math.random() * Math.PI * 2;
+  const lx = w / 2 + Math.cos(lightAngle) * w;
+  const ly = h / 2 + Math.sin(lightAngle) * h;
+  const lightGrad = fctx.createLinearGradient(w / 2 - Math.cos(lightAngle) * w, h / 2 - Math.sin(lightAngle) * h, lx, ly);
+  lightGrad.addColorStop(0, 'rgba(0,0,0,0.05)');
+  lightGrad.addColorStop(0.5, 'rgba(0,0,0,0)');
+  lightGrad.addColorStop(1, 'rgba(0,0,0,0.08)');
   fctx.globalCompositeOperation = 'multiply';
+  fctx.fillStyle = lightGrad;
+  fctx.fillRect(0, 0, w, h);
+
+  const grad = fctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.3, w / 2, h / 2, Math.max(w, h) * 0.68);
+  grad.addColorStop(0, 'rgba(0,0,0,0)');
+  grad.addColorStop(1, 'rgba(0,0,0,0.22)');
   fctx.fillStyle = grad;
   fctx.fillRect(0, 0, w, h);
   fctx.globalCompositeOperation = 'source-over';
@@ -296,7 +307,7 @@ async function rasterizeAndEmbed(out, pdfjsDoc, pageNumber) {
   await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
 
   const processed = applyScannedLook(canvas);
-  const jpegBytes = dataUrlToBytes(processed.toDataURL('image/jpeg', 0.82));
+  const jpegBytes = dataUrlToBytes(processed.toDataURL('image/jpeg', 0.72));
   const image = await out.embedJpg(jpegBytes);
   const outPage = out.addPage([baseViewport.width, baseViewport.height]);
   outPage.drawImage(image, { x: 0, y: 0, width: baseViewport.width, height: baseViewport.height });
