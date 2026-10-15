@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testdokument-Generator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <span class="title">Testdokument-Generator</span>
+  <div class="actions">
+    <span class="status" id="status"></span>
+    <button id="btnDownload"><i class="icon">&#8595;</i> Download</button>
+    <button id="btnPrint"><i class="icon">&#9113;</i> Drucken</button>
+  </div>
+</header>
+
+<div class="main">
+
+  <aside class="tree" id="treePanel">
+    <div class="panel-title">Gliederung</div>
+    <div id="treeContent" class="tree-content">
+      <div class="tree-empty">Noch leer</div>
+    </div>
+  </aside>
+
+  <section class="strip-wrap">
+    <div class="strip" id="strip"></div>
+    <div class="strip-empty" id="stripEmpty">Noch keine Seiten &ndash; links eine Quelle anklicken oder rechts etwas erzeugen.</div>
+  </section>
+
+  <aside class="side-panel">
+    <div class="tabs">
+      <button class="tab active" data-tab="quellen">Quellen</button>
+      <button class="tab" data-tab="generator">Generator</button>
+    </div>
+
+    <div id="tabQuellen" class="tab-content active">
+      <button id="btnPickDir" class="wide-btn">Verzeichnis w&auml;hlen&hellip;</button>
+      <div id="quellenGroups" class="quellen-groups"></div>
+    </div>
+
+    <div id="tabGenerator" class="tab-content">
+
+      <div class="gen-section">
+        <h3>Pakettrennblatt</h3>
+        <label>Dokumentenkategorie
+          <select id="genPaketKategorie"></select>
+        </label>
+        <button data-gen="paket" class="wide-btn">Einf&uuml;gen</button>
+      </div>
+
+      <div class="gen-section">
+        <h3>Dokumenttrennblatt</h3>
+        <label>Fachsystem
+          <select id="genDokFachsystem"></select>
+        </label>
+        <label>Dokumenttyp
+          <select id="genDokTyp"></select>
+        </label>
+        <button data-gen="dokument" class="wide-btn">Einf&uuml;gen</button>
+      </div>
+
+      <div class="gen-section">
+        <h3>Zusatzbehandlung (ZBH)</h3>
+        <p class="hint">Statisches Trennblatt ohne Eingabefelder.</p>
+        <button data-gen="zbh" class="wide-btn">Einf&uuml;gen</button>
+      </div>
+
+      <div class="gen-section">
+        <h3>Dummy-Seite</h3>
+        <label>Anzahl
+          <input type="number" id="genSeiteAnzahl" value="1" min="1" max="50">
+        </label>
+        <label>Inhalt
+          <select id="genSeiteInhalt">
+            <option value="stempel">Seitenzahl-Stempel</option>
+            <option value="lorem">Lorem-Text</option>
+          </select>
+        </label>
+        <button data-gen="seite" class="wide-btn">Einf&uuml;gen</button>
+      </div>
+
+    </div>
+  </aside>
+
+</div>
+
+<input type="file" id="dirInput" webkitdirectory multiple hidden>
+
+<script src="lib/pdf-lib.min.js"></script>
+<script src="lib/pdf.min.js"></script>
+<script src="lib/qrcode.js"></script>
+<script src="data/data.js"></script>
+<script src="pdfgen.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

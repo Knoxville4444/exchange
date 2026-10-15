@@ -1,0 +1,2498 @@
+{
+  "patgbm": [
+    {
+      "nr": 1,
+      "name": "Aktenzeichen-Liste (Umschreibung)"
+    },
+    {
+      "nr": 2,
+      "name": "Nachgang: Unerwartet"
+    },
+    {
+      "nr": 4,
+      "name": "Antrag: Vorschusszahlung"
+    },
+    {
+      "nr": 5,
+      "name": "Bescheinigung: Verdienstausfall"
+    },
+    {
+      "nr": 6,
+      "name": "Erklärung: Verzicht"
+    },
+    {
+      "nr": 7,
+      "name": "Kostenbelege (Fahrtkosten, Übernachtungskosten)"
+    },
+    {
+      "nr": 8,
+      "name": "Nachgang: Zeugenvernehmung/Zeugenentschädigung"
+    },
+    {
+      "nr": 9,
+      "name": "Nachgereichte Ansprüche (Gbm)"
+    },
+    {
+      "nr": 10,
+      "name": "Antrag: VKH (vor Anmeldung)"
+    },
+    {
+      "nr": 11,
+      "name": "Antrag: VKH-Übernahme auf Neuanmeldung"
+    },
+    {
+      "nr": 13,
+      "name": "Antrag: Zurücknahme der nationalen Bestimmung"
+    },
+    {
+      "nr": 14,
+      "name": "Erfinderbenennung"
+    },
+    {
+      "nr": 15,
+      "name": "Antrag: Vorzeitige Beendigung der Aussetzung"
+    },
+    {
+      "nr": 16,
+      "name": "Vorblatt bei einer Serie von Anmeldungen"
+    },
+    {
+      "nr": 18,
+      "name": "Antrag: Beschleunigung"
+    },
+    {
+      "nr": 19,
+      "name": "Sachstandsanfrage"
+    },
+    {
+      "nr": 20,
+      "name": "Antrag: Ausstellung eines Prioritätsbelegs mit/ohne Apostillen"
+    },
+    {
+      "nr": 21,
+      "name": "Antrag: Berichtigung eines Prioritätsbelegs oder einer sonstigen Bescheinigung/Beglaubigung"
+    },
+    {
+      "nr": 22,
+      "name": "Antrag: Ausstellung einer sonstigen Bescheinigung/Beglaubigung mit/ohne Apostillen"
+    },
+    {
+      "nr": 24,
+      "name": "Nachgang: Verfügungsbeschränkung"
+    },
+    {
+      "nr": 25,
+      "name": "Nachweise zur Verpfändung"
+    },
+    {
+      "nr": 26,
+      "name": "Beschwerde nach Frist"
+    },
+    {
+      "nr": 27,
+      "name": "Antrag: PPH-Beschleunigung CNIPA"
+    },
+    {
+      "nr": 28,
+      "name": "Antrag: PPH-Beschleunigung CNIPA"
+    },
+    {
+      "nr": 29,
+      "name": "Antrag: GPPH-Beschleunigung"
+    },
+    {
+      "nr": 30,
+      "name": "Antrag: GPPH-Beschleunigung"
+    },
+    {
+      "nr": 31,
+      "name": "SdT -"
+    },
+    {
+      "nr": 32,
+      "name": "Antrag: Ausfertigung Beschluss"
+    },
+    {
+      "nr": 33,
+      "name": "Nachgang: unerwartet (ohne Frist) Einspruch / Antrag: Anhörung Einspruch"
+    },
+    {
+      "nr": 34,
+      "name": "Antrag: Entscheidung des Einspruchs durch BPatG"
+    },
+    {
+      "nr": 35,
+      "name": "Nachgang: erwartet (mit Frist) Einspruch"
+    },
+    {
+      "nr": 39,
+      "name": "Nachgang: Gbm Sach- und Formalprüfung"
+    },
+    {
+      "nr": 40,
+      "name": "Nachgang: Abzweigung"
+    },
+    {
+      "nr": 41,
+      "name": "Nachgang: Gebührenkorrektur"
+    },
+    {
+      "nr": 42,
+      "name": "Nachgang: Eingabe zu Kostenfestsetzung"
+    },
+    {
+      "nr": 43,
+      "name": "Nachgang: Anhörung mündliche Verhandlung"
+    },
+    {
+      "nr": 44,
+      "name": "Nachgang: Insolvenzverfahren"
+    },
+    {
+      "nr": 45,
+      "name": "Antrag: Kostenerstattung"
+    },
+    {
+      "nr": 46,
+      "name": "Nachgang: Kostenerstattung"
+    },
+    {
+      "nr": 47,
+      "name": "Nachgang: Lizenzbereitschaft/Lizenzinteresseerklärung"
+    },
+    {
+      "nr": 48,
+      "name": "Stellungnahme im wechselseitigen Versand"
+    },
+    {
+      "nr": 49,
+      "name": "Antrag: Löschung/Feststellung (Gbm)"
+    },
+    {
+      "nr": 50,
+      "name": "Nachgang: Löschung/Feststellung (Gbm)"
+    },
+    {
+      "nr": 51,
+      "name": "Antrag: Vollstreckbare Ausfertigung des Kostenfestsetzungsbeschlusses (Gbm)"
+    },
+    {
+      "nr": 52,
+      "name": "Nachgang: Patentprüfung"
+    },
+    {
+      "nr": 53,
+      "name": "Nachweis zu Insolvenz"
+    },
+    {
+      "nr": 54,
+      "name": "Nachgang: Patent-, Gebrauchsmuster- und Topographieanmeldung"
+    },
+    {
+      "nr": 55,
+      "name": "Nachgang: Offensichtlichkeits- und Formalprüfung (Pat)"
+    },
+    {
+      "nr": 56,
+      "name": "Nachgang: Beschränkung/Widerruf"
+    },
+    {
+      "nr": 57,
+      "name": "Ausstellungsbescheinigung"
+    },
+    {
+      "nr": 58,
+      "name": "Unerwarteter Nachgang: Eingabe zu Kostenfestsetzung"
+    },
+    {
+      "nr": 59,
+      "name": "Nachscan"
+    },
+    {
+      "nr": 60,
+      "name": "Nachgang: Recherche"
+    },
+    {
+      "nr": 62,
+      "name": "Nachgang: Ausscheidung"
+    },
+    {
+      "nr": 63,
+      "name": "Nachgang: Teilung"
+    },
+    {
+      "nr": 65,
+      "name": "Nachgang: Topographie Formal- und  Sachprüfung"
+    },
+    {
+      "nr": 66,
+      "name": "Übersetzung einer Anmeldung"
+    },
+    {
+      "nr": 67,
+      "name": "Nachgang: Umschreibung"
+    },
+    {
+      "nr": 68,
+      "name": "Nachgang: VKH"
+    },
+    {
+      "nr": 69,
+      "name": "Unterlagen zur Umschreibung"
+    },
+    {
+      "nr": 70,
+      "name": "Nachweise zu VKH"
+    },
+    {
+      "nr": 71,
+      "name": "Nachweise zur Wiedereinsetzung"
+    },
+    {
+      "nr": 72,
+      "name": "Nachgang: Wiedereinsetzung"
+    },
+    {
+      "nr": 73,
+      "name": "Nachgang: Negative Erledigung"
+    },
+    {
+      "nr": 74,
+      "name": "Nachgang: Ablauf Zustellnachweisfrist"
+    },
+    {
+      "nr": 75,
+      "name": "Nachgang: Erneute Übersendung"
+    },
+    {
+      "nr": 76,
+      "name": "Nachgang: Eingabe zu Allgemeinem Fachprozess"
+    },
+    {
+      "nr": 77,
+      "name": "Unerwarteter Nachgang: Eingabe zu Allgemeinem Fachprozess"
+    },
+    {
+      "nr": 78,
+      "name": "Recherchebericht: kooperierende Schutzrechtsbehörde"
+    },
+    {
+      "nr": 79,
+      "name": "Erstbescheid: kooperierende Schutzrechtsbehörde"
+    },
+    {
+      "nr": 80,
+      "name": "Antrag: Patentprüfung"
+    },
+    {
+      "nr": 85,
+      "name": "Zurücknahme: Patentprüfungsantrag"
+    },
+    {
+      "nr": 87,
+      "name": "Sonderformat-Dokument"
+    },
+    {
+      "nr": 89,
+      "name": "Antrag: Isolierte Kostenentscheidung"
+    },
+    {
+      "nr": 90,
+      "name": "Nachgang: Eingabe zu isolierter Kostenentscheidung"
+    },
+    {
+      "nr": 91,
+      "name": "Unerwarteter Nachgang: Eingabe zu isolierter Kostenentscheidung"
+    },
+    {
+      "nr": 92,
+      "name": "Zurücknahme: Löschungsantrag/Widerspruch (Gbm)"
+    },
+    {
+      "nr": 99,
+      "name": "Nachgang: Mitteilung mit Kenntnisnahmefrist"
+    },
+    {
+      "nr": 100,
+      "name": "Antrag: Erteilung eines Patents"
+    },
+    {
+      "nr": 101,
+      "name": "Antrag: PCT-Anmeldung"
+    },
+    {
+      "nr": 102,
+      "name": "Antrag: Veröffentlichung übersetzter Ansprüche von EP-Anmeldungen"
+    },
+    {
+      "nr": 103,
+      "name": "Nachgang: Veröffentlichung übersetzter Ansprüche von EP-Anmeldungen"
+    },
+    {
+      "nr": 106,
+      "name": "Urkunde (als Kopie eingegangen)"
+    },
+    {
+      "nr": 107,
+      "name": "Urkunde (als Original eingegangen)"
+    },
+    {
+      "nr": 110,
+      "name": "Antrag: Veröffentlichung übersetzter Ansprüche von EP-Anmeldungen"
+    },
+    {
+      "nr": 111,
+      "name": "Authentizitäts- und Identitätsnachweis BPatG"
+    },
+    {
+      "nr": 112,
+      "name": "Authentizitäts- und Identitätsnachweis BPatG"
+    },
+    {
+      "nr": 113,
+      "name": "Rechtskraftvermerk BPatG"
+    },
+    {
+      "nr": 114,
+      "name": "Rechtskraftvermerk BPatG"
+    },
+    {
+      "nr": 115,
+      "name": "Verkündungsvermerk BPatG"
+    },
+    {
+      "nr": 116,
+      "name": "Verkündungsvermerk BPatG"
+    },
+    {
+      "nr": 117,
+      "name": "Transfervermerk BPatG"
+    },
+    {
+      "nr": 118,
+      "name": "Transfervermerk BPatG"
+    },
+    {
+      "nr": 120,
+      "name": "Rückschein (Einschreiben)"
+    },
+    {
+      "nr": 134,
+      "name": "Angaben zu einem hinterlegten Mikroorganismus oder anderem biologischen Material (Juli 1998 Nachdr. Jan 2004)"
+    },
+    {
+      "nr": 135,
+      "name": "Angaben zu einem hinterlegten Mikroorganismus oder anderem biologischen Material (Juli 1998 Nachdr. Jan 2004)"
+    },
+    {
+      "nr": 136,
+      "name": "Nachgang zu Bescheid"
+    },
+    {
+      "nr": 137,
+      "name": "Nachgang: Mitteilung bezüglich Erklärung Regel 4.17"
+    },
+    {
+      "nr": 138,
+      "name": "Nachgang: Einleitung der nationalen Phase einer PCT-Anmeldung (Bestimmungsamt)"
+    },
+    {
+      "nr": 139,
+      "name": "Nachgang: Zurücknahme der nationalen Bestimmung"
+    },
+    {
+      "nr": 140,
+      "name": "Antrag: Berichtigung Empfangsbestätigung"
+    },
+    {
+      "nr": 141,
+      "name": "Nachgang: Berichtigung"
+    },
+    {
+      "nr": 145,
+      "name": "Vertretervollmacht"
+    },
+    {
+      "nr": 147,
+      "name": "Abschrift der Voranmeldung bei Priorität"
+    },
+    {
+      "nr": 148,
+      "name": "Sequenzprotokoll (Papier, PDF-Format)"
+    },
+    {
+      "nr": 149,
+      "name": "umfangreiche Anmeldungsunterlagen nach § 6 Abs. 1 S. 2 PatV"
+    },
+    {
+      "nr": 151,
+      "name": "Antrag: Akteneinsicht"
+    },
+    {
+      "nr": 152,
+      "name": "Nachgang: Akteneinsicht"
+    },
+    {
+      "nr": 153,
+      "name": "Antrag: Aussetzung Patent"
+    },
+    {
+      "nr": 154,
+      "name": "Antrag: Eintragung/Löschung einer ausschließlichen Lizenz"
+    },
+    {
+      "nr": 155,
+      "name": "Nachgang: Eintragung/Löschung einer ausschließlichen Lizenz"
+    },
+    {
+      "nr": 156,
+      "name": "Nachweis über die Zustimmung des jeweils anderen Teils"
+    },
+    {
+      "nr": 157,
+      "name": "Nachgang: Ausstellung von Prioritätsbelegen"
+    },
+    {
+      "nr": 158,
+      "name": "Antrag: PCT-Anmeldung"
+    },
+    {
+      "nr": 159,
+      "name": "Antrag: Aussetzung Patent"
+    },
+    {
+      "nr": 160,
+      "name": "Antrag: Änderung der Aussetzung Patent"
+    },
+    {
+      "nr": 161,
+      "name": "Antrag: Berichtigung"
+    },
+    {
+      "nr": 162,
+      "name": "Beschwerde"
+    },
+    {
+      "nr": 163,
+      "name": "Anlagen"
+    },
+    {
+      "nr": 164,
+      "name": "Ablebensmitteilung"
+    },
+    {
+      "nr": 165,
+      "name": "Nachgang: Erbenermittlung"
+    },
+    {
+      "nr": 167,
+      "name": "Eingang Einspruch"
+    },
+    {
+      "nr": 168,
+      "name": "Beitritt zum Einspruch"
+    },
+    {
+      "nr": 170,
+      "name": "Antrag: Fristverlängerung"
+    },
+    {
+      "nr": 171,
+      "name": "Antrag: Gebührenkorrektur"
+    },
+    {
+      "nr": 175,
+      "name": "Antrag: Eintragung eines Gebrauchsmusters"
+    },
+    {
+      "nr": 177,
+      "name": "Abschrift Abzweigung"
+    },
+    {
+      "nr": 178,
+      "name": "Nachgang: Gebrauchsmusteranmeldung"
+    },
+    {
+      "nr": 179,
+      "name": "Antrag: Anhörung"
+    },
+    {
+      "nr": 180,
+      "name": "Erklärung: Lizenzinteresse"
+    },
+    {
+      "nr": 181,
+      "name": "Erklärung: Lizenzbereitschaft"
+    },
+    {
+      "nr": 182,
+      "name": "Erklärung: Lizenzinteresse"
+    },
+    {
+      "nr": 183,
+      "name": "Bestellte Schrift"
+    },
+    {
+      "nr": 184,
+      "name": "Erklärung: Lizenzinteresse"
+    },
+    {
+      "nr": 185,
+      "name": "Mitteilung: Vertreteränderung"
+    },
+    {
+      "nr": 186,
+      "name": "BPatG Entscheidung zur Nichtigkeitsklage"
+    },
+    {
+      "nr": 187,
+      "name": "Nachgang: Vertreter-/Adressänderung/Adressverwendung"
+    },
+    {
+      "nr": 189,
+      "name": "Eintritt in die nationale Phase für ein Gebrauchsmuster"
+    },
+    {
+      "nr": 190,
+      "name": "Antrag: Patentbeschränkung"
+    },
+    {
+      "nr": 191,
+      "name": "Zurücknahme: Patentbeschränkungsantrag"
+    },
+    {
+      "nr": 192,
+      "name": "Übersetzung PCT-Anmeldung"
+    },
+    {
+      "nr": 194,
+      "name": "Antrag: Recherche"
+    },
+    {
+      "nr": 195,
+      "name": "Eintritt in die nationale Phase für ein Gebrauchsmuster"
+    },
+    {
+      "nr": 196,
+      "name": "Rückläufer"
+    },
+    {
+      "nr": 197,
+      "name": "Erklärung: Rechtsmittelverzicht"
+    },
+    {
+      "nr": 198,
+      "name": "Erklärung: Ausscheidung"
+    },
+    {
+      "nr": 199,
+      "name": "Antrag: Antrag auf Verfahrenskostenhilfe"
+    },
+    {
+      "nr": 200,
+      "name": "Sonstiges ZV"
+    },
+    {
+      "nr": 203,
+      "name": "Antrag: Veröffentlichung berichtigte Übersetzung EP-Patentschrift"
+    },
+    {
+      "nr": 207,
+      "name": "Antrag: Erteilung eines Patents"
+    },
+    {
+      "nr": 208,
+      "name": "Antrag: Erteilung Ergänzendes Schutzzertifikat für Arzneimittel, Pflanzenschutzmittel"
+    },
+    {
+      "nr": 209,
+      "name": "Einleitung der nationalen Phase eines Patents"
+    },
+    {
+      "nr": 210,
+      "name": "Antrag: Erteilung Ergänzendes Schutzzertifikat für Arzneimittel, Pflanzenschutzmittel"
+    },
+    {
+      "nr": 211,
+      "name": "Nachgang: Ergänzende Schutzzertifikate"
+    },
+    {
+      "nr": 213,
+      "name": "Antrag: Veröffentlichung berichtigte Übersetzung EP-Patentschrift"
+    },
+    {
+      "nr": 214,
+      "name": "Nachgang: EPA-Patente"
+    },
+    {
+      "nr": 215,
+      "name": "Genehmigung zu ESZ"
+    },
+    {
+      "nr": 216,
+      "name": "Anlage zu ESZ"
+    },
+    {
+      "nr": 217,
+      "name": "Antrag: Laufzeitverlängerung"
+    },
+    {
+      "nr": 219,
+      "name": "Einleitung der nationalen Phase eines Patents"
+    },
+    {
+      "nr": 220,
+      "name": "Antrag: Vorzeitige Offenlegung"
+    },
+    {
+      "nr": 221,
+      "name": "Antrag: Weiterbehandlung"
+    },
+    {
+      "nr": 223,
+      "name": "Widerspruch gegen Löschungsantrag"
+    },
+    {
+      "nr": 224,
+      "name": "Erklärung: Zurücknahme/Verzicht"
+    },
+    {
+      "nr": 226,
+      "name": "BPatG Entscheidung Technischer Senat"
+    },
+    {
+      "nr": 227,
+      "name": "BPatG Entscheidung Juristischer Beschwerdesenat"
+    },
+    {
+      "nr": 228,
+      "name": "Mitteilung: Aktenzeichen BPatG"
+    },
+    {
+      "nr": 232,
+      "name": "Empfangsbekenntnis"
+    },
+    {
+      "nr": 233,
+      "name": "Empfangsbekenntnis DPMAdirektPro"
+    },
+    {
+      "nr": 241,
+      "name": "Aktenanforderung des BPatG zur Nichtigkeitsklage"
+    },
+    {
+      "nr": 242,
+      "name": "Mitteilung: BPatG-AKZ"
+    },
+    {
+      "nr": 243,
+      "name": "Antrag: Videokonferenz"
+    },
+    {
+      "nr": 244,
+      "name": "Nachgang: Eingabe zu Videokonferenz"
+    },
+    {
+      "nr": 245,
+      "name": "Unerwarteter Nachgang: Eingabe zu Videokonferenz"
+    },
+    {
+      "nr": 250,
+      "name": "Erklärung: Teilung"
+    },
+    {
+      "nr": 251,
+      "name": "Erklärung: Teilung Pat"
+    },
+    {
+      "nr": 252,
+      "name": "Erklärung: Teilung Gbm"
+    },
+    {
+      "nr": 253,
+      "name": "Antrag: Videokonferenz"
+    },
+    {
+      "nr": 254,
+      "name": "Nachgang: Eingabe zu Videokonferenz"
+    },
+    {
+      "nr": 255,
+      "name": "Unerwarteter Nachgang: Eingabe zu Videokonferenz"
+    },
+    {
+      "nr": 256,
+      "name": "Antrag: Laufzeitberichtigung"
+    },
+    {
+      "nr": 257,
+      "name": "Nachgang: Eingabe zu Laufzeitberichtigung"
+    },
+    {
+      "nr": 258,
+      "name": "Unerwarteter Nachgang: Eingabe zu Laufzeitberichtigung"
+    },
+    {
+      "nr": 259,
+      "name": "Zurücknahme: Laufzeitberichtigung"
+    },
+    {
+      "nr": 260,
+      "name": "Ablehnungsgesuch § 42 ZPO (Befangenheit)"
+    },
+    {
+      "nr": 261,
+      "name": "Nachgang: Eingabe zu Ablehnungsgesuch (Befangenheit)"
+    },
+    {
+      "nr": 262,
+      "name": "Unerwarteter Nachgang: Eingabe zu Ablehnungsgesuch (Befangenheit)"
+    },
+    {
+      "nr": 263,
+      "name": "Zurücknahme: Ablehnungsgesuch (Befangenheit)"
+    },
+    {
+      "nr": 264,
+      "name": "Mitteilung gem. Art. 5 Abs. 2 (ESZ Ausnahmeregelung)"
+    },
+    {
+      "nr": 265,
+      "name": "Nachgang: Eingabe zu ESZ Ausnahmeregelung"
+    },
+    {
+      "nr": 266,
+      "name": "Unerwarteter Nachgang: Eingabe zu ESZ Ausnahmeregelung"
+    },
+    {
+      "nr": 267,
+      "name": "Antrag: Laufzeitverlängerung"
+    },
+    {
+      "nr": 268,
+      "name": "Nachgang: Eingabe zu Laufzeitverlängerung"
+    },
+    {
+      "nr": 269,
+      "name": "Unerwarteter Nachgang: Eingabe zu Laufzeitverlängerung"
+    },
+    {
+      "nr": 270,
+      "name": "Zurücknahme: Laufzeitverlängerung"
+    },
+    {
+      "nr": 271,
+      "name": "Mitteilung gem. Art. 5 Abs. 2 (ESZ Ausnahmeregelung)"
+    },
+    {
+      "nr": 272,
+      "name": "Antrag: Laufzeitverlängerung"
+    },
+    {
+      "nr": 275,
+      "name": "Bezugszeichenliste"
+    },
+    {
+      "nr": 279,
+      "name": "Erfinderbenennung"
+    },
+    {
+      "nr": 291,
+      "name": "Antrag: Widerruf"
+    },
+    {
+      "nr": 292,
+      "name": "Zurücknahme: Widerruf"
+    },
+    {
+      "nr": 300,
+      "name": "Antrag: Umschreibung"
+    },
+    {
+      "nr": 301,
+      "name": "Antrag: Patentprüfung"
+    },
+    {
+      "nr": 302,
+      "name": "Antrag: Eintragung einer Verfügungsbeschränkung"
+    },
+    {
+      "nr": 303,
+      "name": "Prioritätserklärung (Beanspruchung einer Priorität)"
+    },
+    {
+      "nr": 304,
+      "name": "Erklärung: Prioritätsrechtsübertragung"
+    },
+    {
+      "nr": 305,
+      "name": "Nachgang: Prioritätenprüfung"
+    },
+    {
+      "nr": 311,
+      "name": "Antrag: Eintragung/Löschung einer Verfügungsbeschränkung"
+    },
+    {
+      "nr": 313,
+      "name": "Erklärung: Zustimmung zur Eintragung eines Rechtsübergangs (§ 28 DPMAV), einer Verpfändung (§ 29 DPMAV), eines sonstigen dinglichen Rechts (§ 29 DPMAV)"
+    },
+    {
+      "nr": 319,
+      "name": "Antrag: Umschreibung Pat/ES"
+    },
+    {
+      "nr": 320,
+      "name": "Antrag: Eintragung eines Insolvenzverfahrens ins Register"
+    },
+    {
+      "nr": 321,
+      "name": "Erklärung: Zustimmung zur Eintragung eines Rechtsübergangs (§ 28 DPMAV), einer Verpfändung (§ 29 DPMAV), eines sonstigen dinglichen Rechts (§ 29 DPMAV)"
+    },
+    {
+      "nr": 322,
+      "name": "Mitteilung: Insolvenz"
+    },
+    {
+      "nr": 323,
+      "name": "Antrag: Nachträgliche Eintragung eines Insolvenzverfahrens ins Register"
+    },
+    {
+      "nr": 324,
+      "name": "Mitteilung: Einstellung des Verfahrens"
+    },
+    {
+      "nr": 325,
+      "name": "Antrag: Nachträgliche Eintragung eines Insolvenzverfahrens ins Register"
+    },
+    {
+      "nr": 326,
+      "name": "Antrag: Eintragung eines Insolvenzverfahrens ins Register"
+    },
+    {
+      "nr": 330,
+      "name": "Mitteilung: Fehlerhaftes AKZ"
+    },
+    {
+      "nr": 340,
+      "name": "Antrag: Eintragung als Zusatzanmeldung"
+    },
+    {
+      "nr": 341,
+      "name": "Antrag: Eintragung als Zusatzanmeldung"
+    },
+    {
+      "nr": 342,
+      "name": "Antrag: Umwandlung einer Zusatzanmeldung in eine selbständige Patentanmeldung"
+    },
+    {
+      "nr": 343,
+      "name": "Erklärung: Zurücknahme Zusatzanmeldung"
+    },
+    {
+      "nr": 344,
+      "name": "Nachgang: Bearbeitung von Zusatzverhältnissen"
+    },
+    {
+      "nr": 351,
+      "name": "Zurücknahme: Abzweigungserklärung"
+    },
+    {
+      "nr": 380,
+      "name": "Antrag: Recherche Pat"
+    },
+    {
+      "nr": 381,
+      "name": "Antrag: Recherche Gbm"
+    },
+    {
+      "nr": 390,
+      "name": "Antrag: Wiedereinsetzung"
+    },
+    {
+      "nr": 410,
+      "name": "Erklärung: Ausscheidung Pat"
+    },
+    {
+      "nr": 411,
+      "name": "Erklärung: Ausscheidung Gbm"
+    },
+    {
+      "nr": 415,
+      "name": "Antrag: Aussetzung Gebrauchsmuster"
+    },
+    {
+      "nr": 531,
+      "name": "Antrag: Kostenfestsetzung"
+    },
+    {
+      "nr": 600,
+      "name": "Antrag: Eintragung eines Gebrauchsmusters"
+    },
+    {
+      "nr": 601,
+      "name": "Antrag: Aussetzung Gebrauchsmuster"
+    },
+    {
+      "nr": 633,
+      "name": "Antrag: Umschreibung Gbm/Topo"
+    },
+    {
+      "nr": 660,
+      "name": "Antrag: Eintragung des Schutzes einer Topografie eines mikroelektronischen Halbleitererzeugnisses"
+    },
+    {
+      "nr": 661,
+      "name": "Antrag: Eintragung des Schutzes einer Topografie eines mikroelektronischen Halbleitererzeugnisses"
+    },
+    {
+      "nr": 663,
+      "name": "Mitteilung: Änderung von Patentansprüchen"
+    },
+    {
+      "nr": 664,
+      "name": "Erklärung: Beanspruchung einer Priorität für eine PCT-Anmeldung"
+    },
+    {
+      "nr": 665,
+      "name": "Nachgang: Unerwartet nachgereichte Unterlagen"
+    },
+    {
+      "nr": 666,
+      "name": "Zusatzerklärung von natürlichen Personen aufgrund des 14. Sanktionspakets gegen Russland gem. Art. 5s Abs. 1 VO (EU) 833/2014"
+    },
+    {
+      "nr": 701,
+      "name": "Anschreiben"
+    },
+    {
+      "nr": 702,
+      "name": "Zusammenfassung"
+    },
+    {
+      "nr": 703,
+      "name": "Beschreibung"
+    },
+    {
+      "nr": 704,
+      "name": "Ansprüche"
+    },
+    {
+      "nr": 705,
+      "name": "Zeichnung"
+    },
+    {
+      "nr": 706,
+      "name": "Gemischte Anmeldeunterlagen"
+    },
+    {
+      "nr": 713,
+      "name": "Beschreibung - Änderungsexemplar"
+    },
+    {
+      "nr": 714,
+      "name": "Ansprüche - Änderungsexemplar"
+    },
+    {
+      "nr": 715,
+      "name": "Zeichnung - Änderungsexemplar"
+    },
+    {
+      "nr": 762,
+      "name": "Eidesstattliche Versicherung (als Kopie eingegangen)"
+    },
+    {
+      "nr": 763,
+      "name": "Eidesstattliche Versicherung (als Original eingegangen)"
+    },
+    {
+      "nr": 900,
+      "name": "Nachgang zu Generischem Prozess"
+    },
+    {
+      "nr": 902,
+      "name": "Postzustellungsurkunde (PZU)"
+    },
+    {
+      "nr": 905,
+      "name": "Antrag: Kostenerstattung"
+    },
+    {
+      "nr": 907,
+      "name": "Einzel-Einzugsermächtigung"
+    },
+    {
+      "nr": 910,
+      "name": "Fax, unvollständig"
+    },
+    {
+      "nr": 917,
+      "name": "Antrag: Erteilung eines Prioritätsbelegs oder einer sonstigen Bescheinigung/Beglaubigung"
+    },
+    {
+      "nr": 918,
+      "name": "Antrag: Erteilung eines elektronischen Prioritätsbelegs und Hinterlegung in WIPO DAS"
+    },
+    {
+      "nr": 920,
+      "name": "Antrag: Erteilung eines elektronischen Prioritätsbelegs und Hinterlegung in WIPO DAS"
+    },
+    {
+      "nr": 921,
+      "name": "Eingangsbestätigung des BPatG zu einer Beschwerde"
+    },
+    {
+      "nr": 922,
+      "name": "Antrag: DPMAdirektPro Adressverwendung"
+    },
+    {
+      "nr": 923,
+      "name": "Antrag: DPMAdirektPro Adressänderung"
+    },
+    {
+      "nr": 924,
+      "name": "Antrag: DPMAdirektPro Rücknahme Adressverwendung"
+    },
+    {
+      "nr": 925,
+      "name": "Antrag: Berichtigung eines in WIPO DAS hinterlegten Prioritätsbelegs"
+    },
+    {
+      "nr": 926,
+      "name": "WIPO DAS: Certificate of Availability"
+    },
+    {
+      "nr": 927,
+      "name": "Nachgang: Hinterlegung von Prioritätsbelegen in WIPO DAS"
+    },
+    {
+      "nr": 932,
+      "name": "Zusammenfassung (fremdsprachig)"
+    },
+    {
+      "nr": 933,
+      "name": "Beschreibung (fremdsprachig)"
+    },
+    {
+      "nr": 934,
+      "name": "Ansprüche (fremdsprachig)"
+    },
+    {
+      "nr": 935,
+      "name": "Zeichnung (fremdsprachig)"
+    },
+    {
+      "nr": 936,
+      "name": "Gemischte Anmeldeunterlagen (fremdsprachig)"
+    },
+    {
+      "nr": 937,
+      "name": "Begleitschreiben zum Sequenzprotokoll mit den im Einzelnen erläuterten Änderungen"
+    },
+    {
+      "nr": 938,
+      "name": "Erklärung zum Offenbarungsgehalt des Sequenzprotokolls (keine unzulässige Erweiterung)"
+    },
+    {
+      "nr": 941,
+      "name": "Erklärung: Persönliche u. wirtschaftliche Verhältnisse"
+    },
+    {
+      "nr": 950,
+      "name": "Modell mit Foto"
+    },
+    {
+      "nr": 952,
+      "name": "Digitales Medium"
+    },
+    {
+      "nr": 954,
+      "name": "Nachgang: Dokument zur Modell- / Archivverwaltung"
+    },
+    {
+      "nr": 956,
+      "name": "Antrag: Entschädigung als Zeuge/Zeugin nach dem Justizvergütungs- und -entschädigungsgesetz (JVEG)"
+    },
+    {
+      "nr": 957,
+      "name": "Antrag: Entschädigung als Zeuge/Zeugin nach dem Justizvergütungs- und -entschädigungsgesetz (JVEG)"
+    },
+    {
+      "nr": 958,
+      "name": "Sequenzprotokoll (ST.26 Ersatzbeleg)"
+    },
+    {
+      "nr": 960,
+      "name": "Einzel-Einzugsermächtigung"
+    },
+    {
+      "nr": 961,
+      "name": "Sammler-Einzugsermächtigung"
+    },
+    {
+      "nr": 962,
+      "name": "Sammler-Einzugsermächtigung"
+    },
+    {
+      "nr": 963,
+      "name": "Dauer-Einzugsermächtigung"
+    },
+    {
+      "nr": 964,
+      "name": "Dauer-Einzugsermächtigung"
+    },
+    {
+      "nr": 967,
+      "name": "Sammler-Dauer-Einzugsermächtigung"
+    },
+    {
+      "nr": 968,
+      "name": "Sammler-Dauer-Einzugsermächtigung"
+    },
+    {
+      "nr": 969,
+      "name": "SEPA-Mandat"
+    },
+    {
+      "nr": 970,
+      "name": "SEPA-Einzelverwendung"
+    },
+    {
+      "nr": 971,
+      "name": "SEPA-Sammlerverwendung"
+    },
+    {
+      "nr": 972,
+      "name": "SEPA-Mandat Widerruf"
+    },
+    {
+      "nr": 973,
+      "name": "SEPA-Verwendung Einzelwiderruf"
+    },
+    {
+      "nr": 974,
+      "name": "Avis"
+    },
+    {
+      "nr": 975,
+      "name": "SEPA-Einzeldauerverwendung"
+    },
+    {
+      "nr": 976,
+      "name": "SEPA-Sammlerdauerverwendung"
+    },
+    {
+      "nr": 977,
+      "name": "SEPA-Verwendung Sammlerwiderruf"
+    },
+    {
+      "nr": 987,
+      "name": "Rückläufer DPMAdirektPro"
+    },
+    {
+      "nr": 992,
+      "name": "Authentifizierungsprotokoll (elektr. Eingang)"
+    },
+    {
+      "nr": 993,
+      "name": "Deckblatt elektronischer Eingang"
+    },
+    {
+      "nr": 995,
+      "name": "Interner Hinweis"
+    },
+    {
+      "nr": 996,
+      "name": "Signaturprotokoll (elektr. Eingang)"
+    },
+    {
+      "nr": 997,
+      "name": "Sendeprotokoll (elektr. Eingang)"
+    },
+    {
+      "nr": 998,
+      "name": "Leerdokument"
+    },
+    {
+      "nr": 999,
+      "name": "Sonstiges"
+    }
+  ],
+  "designs": [
+    {
+      "nr": 1,
+      "name": "Aktenzeichen-Liste (Umschreibung)"
+    },
+    {
+      "nr": 2,
+      "name": "Nachgang: Unerwartet"
+    },
+    {
+      "nr": 3,
+      "name": "Beschreibung"
+    },
+    {
+      "nr": 4,
+      "name": "Antrag: Vorschusszahlung"
+    },
+    {
+      "nr": 6,
+      "name": "Erklärung: Verzicht"
+    },
+    {
+      "nr": 7,
+      "name": "Kostenbelege (Fahrtkosten, Übernachtungskosten)"
+    },
+    {
+      "nr": 8,
+      "name": "Nachgang: Zeugenvernehmung/Zeugenentschädigung"
+    },
+    {
+      "nr": 12,
+      "name": "Nachgang: Festsetzung des Gegenstandswertes"
+    },
+    {
+      "nr": 16,
+      "name": "Vorblatt bei einer Serie von Anmeldungen"
+    },
+    {
+      "nr": 17,
+      "name": "Nachweise zur Verfügungsbeschränkung"
+    },
+    {
+      "nr": 18,
+      "name": "Antrag: Beschleunigung"
+    },
+    {
+      "nr": 19,
+      "name": "Sachstandsanfrage"
+    },
+    {
+      "nr": 20,
+      "name": "Antrag: Ausstellung eines Prioritätsbelegs mit/ohne Apostillen"
+    },
+    {
+      "nr": 21,
+      "name": "Antrag: Berichtigung eines Prioritätsbelegs oder einer sonstigen Bescheinigung/Beglaubigung"
+    },
+    {
+      "nr": 22,
+      "name": "Antrag: Ausstellung einer sonstigen Bescheinigung/Beglaubigung mit/ohne Apostillen"
+    },
+    {
+      "nr": 23,
+      "name": "Nachgang: Kostenfestsetzung"
+    },
+    {
+      "nr": 24,
+      "name": "Nachgang: Verfügungsbeschränkung"
+    },
+    {
+      "nr": 26,
+      "name": "Beschwerde nach Frist"
+    },
+    {
+      "nr": 32,
+      "name": "Antrag: Ausfertigung Beschluss"
+    },
+    {
+      "nr": 34,
+      "name": "Nachgang: (Teil-)Aufrechterhaltung"
+    },
+    {
+      "nr": 36,
+      "name": "Nachgang: Löschung eines Designs"
+    },
+    {
+      "nr": 37,
+      "name": "Nachgang: Unwirksamkeit internationale Designeintragung"
+    },
+    {
+      "nr": 38,
+      "name": "Nachgang: Fristverlängerung"
+    },
+    {
+      "nr": 41,
+      "name": "Nachgang: Gebührenkorrektur"
+    },
+    {
+      "nr": 43,
+      "name": "Nachgang: Anhörung mündliche Verhandlung"
+    },
+    {
+      "nr": 44,
+      "name": "Nachgang: Insolvenzverfahren"
+    },
+    {
+      "nr": 46,
+      "name": "Nachgang: Kostenerstattung"
+    },
+    {
+      "nr": 48,
+      "name": "Stellungnahme im wechselseitigen Versand"
+    },
+    {
+      "nr": 51,
+      "name": "Antrag: Vollstreckbare Ausfertigung des Kostenfestsetzungsbeschlusses"
+    },
+    {
+      "nr": 53,
+      "name": "Nachweis zu Insolvenz"
+    },
+    {
+      "nr": 59,
+      "name": "Nachscan"
+    },
+    {
+      "nr": 61,
+      "name": "Anschriftenermittlung (Einwohnermeldeamt)"
+    },
+    {
+      "nr": 63,
+      "name": "Nachgang: Teilung"
+    },
+    {
+      "nr": 67,
+      "name": "Nachgang: Umschreibung"
+    },
+    {
+      "nr": 68,
+      "name": "Nachgang: VKH"
+    },
+    {
+      "nr": 69,
+      "name": "Unterlagen zur Umschreibung"
+    },
+    {
+      "nr": 70,
+      "name": "Nachweise zu VKH"
+    },
+    {
+      "nr": 71,
+      "name": "Nachweise zur Wiedereinsetzung"
+    },
+    {
+      "nr": 72,
+      "name": "Nachgang: Wiedereinsetzung"
+    },
+    {
+      "nr": 74,
+      "name": "Nachgang: Ablauf Zustellnachweisfrist"
+    },
+    {
+      "nr": 75,
+      "name": "Nachgang: Erneute Übersendung"
+    },
+    {
+      "nr": 94,
+      "name": "Eintragungsantrag"
+    },
+    {
+      "nr": 95,
+      "name": "Wiedergabeblatt"
+    },
+    {
+      "nr": 96,
+      "name": "Anlageblatt Sammelanmeldung"
+    },
+    {
+      "nr": 97,
+      "name": "Anlage zum Antrag"
+    },
+    {
+      "nr": 98,
+      "name": "Darstellungsübersicht"
+    },
+    {
+      "nr": 99,
+      "name": "Nachgang: kontextfrei erstelltes und versendetes Dokument"
+    },
+    {
+      "nr": 107,
+      "name": "Urkunde (als Original eingegangen)"
+    },
+    {
+      "nr": 120,
+      "name": "Rückschein (Einschreiben)"
+    },
+    {
+      "nr": 145,
+      "name": "Vertretervollmacht"
+    },
+    {
+      "nr": 147,
+      "name": "Abschrift der Voranmeldung bei Priorität"
+    },
+    {
+      "nr": 151,
+      "name": "Antrag: Akteneinsicht"
+    },
+    {
+      "nr": 152,
+      "name": "Nachgang: Akteneinsicht"
+    },
+    {
+      "nr": 157,
+      "name": "Nachgang: Ausstellung von Prioritätsbelegen"
+    },
+    {
+      "nr": 161,
+      "name": "Antrag: Berichtigung"
+    },
+    {
+      "nr": 162,
+      "name": "Beschwerde"
+    },
+    {
+      "nr": 163,
+      "name": "Anlagen"
+    },
+    {
+      "nr": 164,
+      "name": "Ablebensmitteilung"
+    },
+    {
+      "nr": 165,
+      "name": "Nachgang: Erbenermittlung"
+    },
+    {
+      "nr": 170,
+      "name": "Antrag: Fristverlängerung"
+    },
+    {
+      "nr": 171,
+      "name": "Antrag: Gebührenkorrektur"
+    },
+    {
+      "nr": 179,
+      "name": "Antrag: Anhörung"
+    },
+    {
+      "nr": 185,
+      "name": "Mitteilung: Vertreteränderung"
+    },
+    {
+      "nr": 187,
+      "name": "Nachgang: Vertreter-/Adressänderung/Adressverwendung"
+    },
+    {
+      "nr": 193,
+      "name": "Kostenfestsetzungsbeschluss mit Klauselerteilungsvermerk"
+    },
+    {
+      "nr": 196,
+      "name": "Rückläufer"
+    },
+    {
+      "nr": 197,
+      "name": "Erklärung: Rechtsmittelverzicht"
+    },
+    {
+      "nr": 199,
+      "name": "Antrag: Antrag auf Verfahrenskostenhilfe"
+    },
+    {
+      "nr": 200,
+      "name": "Sonstiges ZV"
+    },
+    {
+      "nr": 221,
+      "name": "Antrag: Weiterbehandlung"
+    },
+    {
+      "nr": 225,
+      "name": "Erklärung: Zurücknahme sonstiger Antrag"
+    },
+    {
+      "nr": 228,
+      "name": "Mitteilung: Aktenzeichen BPatG"
+    },
+    {
+      "nr": 233,
+      "name": "Empfangsbekenntnis DPMAdirektPro"
+    },
+    {
+      "nr": 234,
+      "name": "Empfangsbekenntnis"
+    },
+    {
+      "nr": 235,
+      "name": "Empfangsbekenntnis"
+    },
+    {
+      "nr": 300,
+      "name": "Antrag: Umschreibung"
+    },
+    {
+      "nr": 302,
+      "name": "Antrag: Eintragung einer Verfügungsbeschränkung"
+    },
+    {
+      "nr": 303,
+      "name": "Prioritätserklärung (Beanspruchung einer Priorität)"
+    },
+    {
+      "nr": 305,
+      "name": "Nachgang: Prioritätenprüfung"
+    },
+    {
+      "nr": 312,
+      "name": "Mitteilung einer Verfügungsbeschränkung"
+    },
+    {
+      "nr": 322,
+      "name": "Mitteilung: Insolvenz"
+    },
+    {
+      "nr": 324,
+      "name": "Mitteilung: Einstellung des Verfahrens"
+    },
+    {
+      "nr": 390,
+      "name": "Antrag: Wiedereinsetzung"
+    },
+    {
+      "nr": 529,
+      "name": "Antrag: Eintragung eines Designs - Doppelanmeldung"
+    },
+    {
+      "nr": 530,
+      "name": "Antrag: Festsetzung des Gegenstandswertes"
+    },
+    {
+      "nr": 531,
+      "name": "Antrag: Kostenfestsetzung"
+    },
+    {
+      "nr": 532,
+      "name": "Schriftsatz:"
+    },
+    {
+      "nr": 533,
+      "name": "Antrag: Eintragung Verpfändung"
+    },
+    {
+      "nr": 534,
+      "name": "Antrag: Eintragung Sonstiges Dingliches Recht"
+    },
+    {
+      "nr": 535,
+      "name": "Antrag: Eintragung Zwangsvollstreckung"
+    },
+    {
+      "nr": 536,
+      "name": "Antrag: Eintragung Insolvenzverfahren"
+    },
+    {
+      "nr": 537,
+      "name": "Zustimmung: Eintragung Rechtsübergang"
+    },
+    {
+      "nr": 538,
+      "name": "Zustimmung: Eintragung Verpfändung"
+    },
+    {
+      "nr": 539,
+      "name": "Zustimmung: Eintragung Sonstiges Dingliches Recht"
+    },
+    {
+      "nr": 540,
+      "name": "Antrag: Berichtigung"
+    },
+    {
+      "nr": 541,
+      "name": "Antrag: Namens- oder Adressänderung"
+    },
+    {
+      "nr": 542,
+      "name": "Antrag: Eintragung Rechtsübergang"
+    },
+    {
+      "nr": 544,
+      "name": "Antrag: teilweise Aufrechterhaltung"
+    },
+    {
+      "nr": 545,
+      "name": "Antrag: Löschung eines Designs"
+    },
+    {
+      "nr": 546,
+      "name": "Einwilligung: Löschung eines Designs"
+    },
+    {
+      "nr": 547,
+      "name": "Antrag: Verfügungsbeschränkung löschen"
+    },
+    {
+      "nr": 548,
+      "name": "Vollmacht"
+    },
+    {
+      "nr": 550,
+      "name": "Antrag: Insolvenzvermerk löschen"
+    },
+    {
+      "nr": 552,
+      "name": "Nachgang: Löschung eines Designs"
+    },
+    {
+      "nr": 577,
+      "name": "Entwerferbenennung"
+    },
+    {
+      "nr": 578,
+      "name": "Ausstellungsbescheinigung"
+    },
+    {
+      "nr": 579,
+      "name": "Rücknahme der Anmeldung"
+    },
+    {
+      "nr": 580,
+      "name": "Antrag: Feststellung / Erklärung Nichtigkeit"
+    },
+    {
+      "nr": 581,
+      "name": "Nachgang: Feststellung / Erklärung Nichtigkeit"
+    },
+    {
+      "nr": 582,
+      "name": "Widerspruch Nichtigkeitsantrag"
+    },
+    {
+      "nr": 583,
+      "name": "Widerspruchsbegründung"
+    },
+    {
+      "nr": 584,
+      "name": "Rücknahme: Nichtigkeitsantrag"
+    },
+    {
+      "nr": 585,
+      "name": "Mitteilung Erhebung Widerklage"
+    },
+    {
+      "nr": 586,
+      "name": "Urteil Feststellung / Erklärung Nichtigkeit"
+    },
+    {
+      "nr": 587,
+      "name": "Gericht Sonstiges"
+    },
+    {
+      "nr": 588,
+      "name": "Antrag: Unwirksamkeit internationale Designeintragung"
+    },
+    {
+      "nr": 589,
+      "name": "Mitteilung Ergebnis Widerklage"
+    },
+    {
+      "nr": 590,
+      "name": "Antrag: (Teil-)Aufrechterhaltung"
+    },
+    {
+      "nr": 591,
+      "name": "Antrag: (Teil-)Erstreckung"
+    },
+    {
+      "nr": 592,
+      "name": "Antrag: Aufschiebung der Bekanntmachung"
+    },
+    {
+      "nr": 593,
+      "name": "Antrag: vorzeitige Bekanntmachung"
+    },
+    {
+      "nr": 594,
+      "name": "Antrag: Teilung"
+    },
+    {
+      "nr": 595,
+      "name": "Vertreterbestellung"
+    },
+    {
+      "nr": 596,
+      "name": "Anzeige: Vertreteränderung / Niederlegung der Vertretung"
+    },
+    {
+      "nr": 597,
+      "name": "Rücknahme: Antrag auf Aufschiebung der Bekanntmachung"
+    },
+    {
+      "nr": 598,
+      "name": "Beschwerdebegründung"
+    },
+    {
+      "nr": 599,
+      "name": "BPatG / BGH Entscheidung"
+    },
+    {
+      "nr": 666,
+      "name": "Zusatzerklärung von natürlichen Personen aufgrund des 14. Sanktionspakets gegen Russland gem. Art. 5s Abs. 1 VO (EU) 833/2014"
+    },
+    {
+      "nr": 701,
+      "name": "Anschreiben"
+    },
+    {
+      "nr": 718,
+      "name": "Antwortschreiben auf Bescheid"
+    },
+    {
+      "nr": 738,
+      "name": "Ausstellung einer Urkunde / Ersatzurkunde"
+    },
+    {
+      "nr": 763,
+      "name": "Eidesstattliche Versicherung"
+    },
+    {
+      "nr": 765,
+      "name": "Allgemeine Vollmacht"
+    },
+    {
+      "nr": 766,
+      "name": "Angestellten Vollmacht"
+    },
+    {
+      "nr": 900,
+      "name": "Nachgang zu Generischem Prozess"
+    },
+    {
+      "nr": 902,
+      "name": "Postzustellungsurkunde (PZU)"
+    },
+    {
+      "nr": 905,
+      "name": "Antrag: Kostenerstattung"
+    },
+    {
+      "nr": 910,
+      "name": "Fax, unvollständig"
+    },
+    {
+      "nr": 917,
+      "name": "Antrag: Erteilung eines Prioritätsbelegs oder einer sonstigen Bescheinigung/Beglaubigung"
+    },
+    {
+      "nr": 919,
+      "name": "Verdienstausfallbescheinigung"
+    },
+    {
+      "nr": 921,
+      "name": "Eingangsbestätigung des BPatG zu einer Beschwerde"
+    },
+    {
+      "nr": 941,
+      "name": "Erklärung: Persönliche u. wirtschaftliche Verhältnisse"
+    },
+    {
+      "nr": 942,
+      "name": "Antrag: Rückgabe Archivelement"
+    },
+    {
+      "nr": 943,
+      "name": "Nachgang: Archivbearbeitung"
+    },
+    {
+      "nr": 950,
+      "name": "Modell mit Foto"
+    },
+    {
+      "nr": 952,
+      "name": "Digitales Medium"
+    },
+    {
+      "nr": 955,
+      "name": "Flächenmäßige Designabschnitte"
+    },
+    {
+      "nr": 956,
+      "name": "Antrag: Zeugen-/Sachverständigenentschädigung"
+    },
+    {
+      "nr": 967,
+      "name": "Sammler-Dauer-Einzugsermächtigung"
+    },
+    {
+      "nr": 969,
+      "name": "SEPA-Mandat"
+    },
+    {
+      "nr": 970,
+      "name": "SEPA-Einzelverwendung"
+    },
+    {
+      "nr": 971,
+      "name": "SEPA-Sammlerverwendung"
+    },
+    {
+      "nr": 972,
+      "name": "SEPA-Mandat Widerruf"
+    },
+    {
+      "nr": 973,
+      "name": "SEPA-Verwendung Einzelwiderruf"
+    },
+    {
+      "nr": 974,
+      "name": "Avis"
+    },
+    {
+      "nr": 975,
+      "name": "SEPA-Einzeldauerverwendung"
+    },
+    {
+      "nr": 976,
+      "name": "SEPA-Sammlerdauerverwendung"
+    },
+    {
+      "nr": 977,
+      "name": "SEPA-Verwendung Sammlerwiderruf"
+    },
+    {
+      "nr": 987,
+      "name": "Rückläufer DPMAdirektPro"
+    },
+    {
+      "nr": 990,
+      "name": "Nachgang: Designanmeldung"
+    },
+    {
+      "nr": 993,
+      "name": "Deckblatt elektronischer Eingang"
+    },
+    {
+      "nr": 994,
+      "name": "DIZ-Auftrag: Neuscan"
+    },
+    {
+      "nr": 995,
+      "name": "Interner Hinweis"
+    },
+    {
+      "nr": 996,
+      "name": "Signaturprotokoll (elektr. Eingang)"
+    },
+    {
+      "nr": 997,
+      "name": "Sendeprotokoll (elektr. Eingang)"
+    },
+    {
+      "nr": 999,
+      "name": "Sonstiges"
+    }
+  ],
+  "marke": [
+    {
+      "nr": 120,
+      "name": "Rückschein (Einschreiben)"
+    },
+    {
+      "nr": 193,
+      "name": "Kostenfestsetzungsbeschluss mit Klauselerteilungsvermerk"
+    },
+    {
+      "nr": 196,
+      "name": "Rückläufer"
+    },
+    {
+      "nr": 200,
+      "name": "Sonstiges ZV"
+    },
+    {
+      "nr": 232,
+      "name": "Empfangsbekenntnis"
+    },
+    {
+      "nr": 233,
+      "name": "Empfangsbekenntnis DPMAdirektPro"
+    },
+    {
+      "nr": 642,
+      "name": "Antrag auf Erklärung der vollständigen bzw. teilweisen Nichtigkeit wegen älterer Rechte"
+    },
+    {
+      "nr": 643,
+      "name": "Anlage für Antrag auf Nichtigkeit wegen bestehender älterer Rechte - registrierte Rechte"
+    },
+    {
+      "nr": 644,
+      "name": "Anlage für Antrag auf Nichtigkeit wegen bestehender älterer Rechte - nicht registrierte Rechte"
+    },
+    {
+      "nr": 645,
+      "name": "Anlage für Antrag auf Schutzentziehung wegen älterer Rechte - registrierte Rechte"
+    },
+    {
+      "nr": 646,
+      "name": "Anlage für Antrag auf Schutzentziehung wegen älterer Rechte - nicht registrierte Rechte"
+    },
+    {
+      "nr": 666,
+      "name": "Zusatzerklärung von natürlichen Personen aufgrund des 14. Sanktionspakets gegen Russland gem. Art. 5s Abs. 1 VO (EU) 833/2014"
+    },
+    {
+      "nr": 695,
+      "name": "Antrag für die Löschung einer Lizenz"
+    },
+    {
+      "nr": 696,
+      "name": "Antrag für die Eintragung einer Lizenz"
+    },
+    {
+      "nr": 699,
+      "name": "Bereitschaftserklärungen (Lizenzen)"
+    },
+    {
+      "nr": 700,
+      "name": "Antrag auf Eintragung einer Marke in das Register"
+    },
+    {
+      "nr": 706,
+      "name": "Gemischte Anmeldeunterlagen"
+    },
+    {
+      "nr": 707,
+      "name": "Eintragung geografische Angabe"
+    },
+    {
+      "nr": 708,
+      "name": "Änderung der Spezifikation eingetragene geografische Angabe"
+    },
+    {
+      "nr": 709,
+      "name": "Erklärung: Teilung der Anmeldung bzw. der Eintragung einer Marke"
+    },
+    {
+      "nr": 710,
+      "name": "WDVZ"
+    },
+    {
+      "nr": 711,
+      "name": "Einspruch gegen die Eintragung einer geografischen Angabe oder Ursprungsbezeichnung aus einem anderen Mitgliedstaat oder einem Drittland"
+    },
+    {
+      "nr": 712,
+      "name": "Vorblatt bei einer Serie von Anmeldungen"
+    },
+    {
+      "nr": 716,
+      "name": "Antrag Genfer Akte"
+    },
+    {
+      "nr": 720,
+      "name": "Widerspruch gegen die Eintragung einer Marke"
+    },
+    {
+      "nr": 721,
+      "name": "Bescheinigungsverfahren"
+    },
+    {
+      "nr": 722,
+      "name": "Antrag auf Eintragung einer Verpfändung etc."
+    },
+    {
+      "nr": 723,
+      "name": "Cooling-Off (Antrag auf einvernehmliche Zurückstellung im Widerspruchsverfahren)"
+    },
+    {
+      "nr": 724,
+      "name": "Zustimmungserklärung zur Eintragung eines dinglichen Rechts an der Marke"
+    },
+    {
+      "nr": 725,
+      "name": "Anlage zum Widerspruchsformular – Registrierte Widerspruchskennzeichen"
+    },
+    {
+      "nr": 726,
+      "name": "Anlage zum Widerspruchsformular – Nicht registrierte Widerspruchskennzeichen"
+    },
+    {
+      "nr": 727,
+      "name": "Antrag: Ausfertigung - Registerauszug - Heimatbescheinigung - mit/ohne Apostille"
+    },
+    {
+      "nr": 729,
+      "name": "Beschwerde"
+    },
+    {
+      "nr": 731,
+      "name": "Anlage zum Anmeldeformular - Markendarstellung"
+    },
+    {
+      "nr": 735,
+      "name": "BPatG/BGH Entscheidungen"
+    },
+    {
+      "nr": 740,
+      "name": "§ 49 Verfallsverfahren / Schutzentziehung Antrag"
+    },
+    {
+      "nr": 741,
+      "name": "Antrag auf vollständige/teilweise Verlängerung einer Marke"
+    },
+    {
+      "nr": 742,
+      "name": "§ 50 Nichtigkeitsverfahren / Schutzentziehung Antrag"
+    },
+    {
+      "nr": 743,
+      "name": "Antrag auf vollständige/teilweise Löschung wegen Verzicht"
+    },
+    {
+      "nr": 744,
+      "name": "Löschung eingetragene geografische Angabe"
+    },
+    {
+      "nr": 745,
+      "name": "Löschung Schriftverkehr"
+    },
+    {
+      "nr": 749,
+      "name": "Beschluss (alle internen Beschlüsse)"
+    },
+    {
+      "nr": 750,
+      "name": "Umwandlungen"
+    },
+    {
+      "nr": 751,
+      "name": "Serienanmeldung/Massenverfahren"
+    },
+    {
+      "nr": 752,
+      "name": "Eintragungsverfügung (intern)"
+    },
+    {
+      "nr": 756,
+      "name": "Mitteilung Klageerhebung bei einer Verfalls- oder Nichtigkeitsklage"
+    },
+    {
+      "nr": 757,
+      "name": "Mitteilung Klageerhebung bei einer Schutzentziehung"
+    },
+    {
+      "nr": 758,
+      "name": "Mitteilung Klageergebnis bei einer Verfalls- oder Nichtigkeitsklage"
+    },
+    {
+      "nr": 759,
+      "name": "Mitteilung Klageergebnis bei einer Schutzentziehung"
+    },
+    {
+      "nr": 760,
+      "name": "Nebenverfahren/Spezialverfahren"
+    },
+    {
+      "nr": 761,
+      "name": "Antrag auf Rechtsübergang im Register einzutragen"
+    },
+    {
+      "nr": 763,
+      "name": "Eidesstattliche Versicherung"
+    },
+    {
+      "nr": 764,
+      "name": "Antrag auf Eintragung von Änderungen von Namen oder Anschriften"
+    },
+    {
+      "nr": 765,
+      "name": "Allgemeine Vollmacht"
+    },
+    {
+      "nr": 766,
+      "name": "Angestellten Vollmacht"
+    },
+    {
+      "nr": 767,
+      "name": "Markensatzung"
+    },
+    {
+      "nr": 768,
+      "name": "Mitteilung über/Antrag auf Satzungsänderung"
+    },
+    {
+      "nr": 769,
+      "name": "Zeugenentschädigung"
+    },
+    {
+      "nr": 770,
+      "name": "Formular Ausstellungsbescheinigung"
+    },
+    {
+      "nr": 771,
+      "name": "gHA nationaler Einspruch"
+    },
+    {
+      "nr": 772,
+      "name": "Verwerfungsbeschluss"
+    },
+    {
+      "nr": 773,
+      "name": "Darstellung Widerspruchskennzeichen"
+    },
+    {
+      "nr": 776,
+      "name": "Antrag: Teilweiser Rechtsübergang"
+    },
+    {
+      "nr": 777,
+      "name": "Priobeleg bei Unionspriorität"
+    },
+    {
+      "nr": 778,
+      "name": "Aktenvermerk"
+    },
+    {
+      "nr": 779,
+      "name": "Beanstandungsbescheid"
+    },
+    {
+      "nr": 780,
+      "name": "Bitte um Erledigung"
+    },
+    {
+      "nr": 781,
+      "name": "Antrag für die Änderung einer Lizenz"
+    },
+    {
+      "nr": 782,
+      "name": "Erinnerungsbeschluss"
+    },
+    {
+      "nr": 783,
+      "name": "Erinnerungsbeschluss Kollision"
+    },
+    {
+      "nr": 784,
+      "name": "Erstprüferbeschluss"
+    },
+    {
+      "nr": 785,
+      "name": "Externer Bescheid (Anschreiben)"
+    },
+    {
+      "nr": 786,
+      "name": "Gesprächsnotiz"
+    },
+    {
+      "nr": 787,
+      "name": "Kollisionsbeschluss"
+    },
+    {
+      "nr": 788,
+      "name": "Mitteilung Eingang Widersprüche"
+    },
+    {
+      "nr": 789,
+      "name": "Nachforderung Klassengebühr"
+    },
+    {
+      "nr": 790,
+      "name": "Report Widersprüche (Wz 8)"
+    },
+    {
+      "nr": 791,
+      "name": "Schreibauftrag"
+    },
+    {
+      "nr": 792,
+      "name": "Schriftverkehr an Anmelder"
+    },
+    {
+      "nr": 793,
+      "name": "Schriftverkehr an Widersprechenden"
+    },
+    {
+      "nr": 794,
+      "name": "Sonstiger Beschluss"
+    },
+    {
+      "nr": 795,
+      "name": "Übersendungsschreiben Beschlüsse"
+    },
+    {
+      "nr": 796,
+      "name": "Umbuchung"
+    },
+    {
+      "nr": 797,
+      "name": "Umschreibungsmitteilung"
+    },
+    {
+      "nr": 798,
+      "name": "Verfügung Beschwerde"
+    },
+    {
+      "nr": 799,
+      "name": "Anlagen zum Schriftsatz"
+    },
+    {
+      "nr": 800,
+      "name": "Begleitschreiben an das Deutsche Patent- und Markenamt zum Antrag auf internationale Registrierung der Marke"
+    },
+    {
+      "nr": 801,
+      "name": "Application for International Registration Governed Exclusively by the Madrid Agreement"
+    },
+    {
+      "nr": 802,
+      "name": "Application for International Registration Governed Exclusively by the Madrid Agreement"
+    },
+    {
+      "nr": 803,
+      "name": "Application for International Registration Governed by both the Madrid Agreement and the Madrid Protocol"
+    },
+    {
+      "nr": 804,
+      "name": "Designation Subsequent to the International Registration"
+    },
+    {
+      "nr": 805,
+      "name": "Request for the Recording of a Change in Ownership"
+    },
+    {
+      "nr": 806,
+      "name": "Request for the Recording of a Limitation of the List of Goods and Services"
+    },
+    {
+      "nr": 807,
+      "name": "Request for the Recording of a Renunciation"
+    },
+    {
+      "nr": 808,
+      "name": "Request for the Recording of a Cancellation of the international Registration"
+    },
+    {
+      "nr": 809,
+      "name": "Request for the Recording of a Change in Name and/or Address of the Holder"
+    },
+    {
+      "nr": 810,
+      "name": "Request for the Recording of a Change in Name And/or Address of the Representative"
+    },
+    {
+      "nr": 811,
+      "name": "Renewal of the international Registration"
+    },
+    {
+      "nr": 812,
+      "name": "Appointment of a Representative"
+    },
+    {
+      "nr": 813,
+      "name": "Request for the Recording of a License"
+    },
+    {
+      "nr": 814,
+      "name": "Request for Amendment of the Recording of a License"
+    },
+    {
+      "nr": 815,
+      "name": "Request for cancellation of the recording of a License"
+    },
+    {
+      "nr": 816,
+      "name": "Subsequent Designation Resulting from Conversion (European Union)"
+    },
+    {
+      "nr": 817,
+      "name": "Claim of Seniority (European Union)"
+    },
+    {
+      "nr": 818,
+      "name": "Declaration of Intention to use the Mark - United States of America"
+    },
+    {
+      "nr": 819,
+      "name": "Request for the Recording of A Restriction of the Holder`s Right of Disposal"
+    },
+    {
+      "nr": 821,
+      "name": "Anlage zum Anmeldeformular - Markendarstellung durch Text"
+    },
+    {
+      "nr": 822,
+      "name": "Anlage zum Anmeldeformular - Markenbeschreibung"
+    },
+    {
+      "nr": 823,
+      "name": "Anlage zum Anmeldeformular - Übersetzung, Transliteration, Transkription"
+    },
+    {
+      "nr": 824,
+      "name": "Anlage weitere Anmelder"
+    },
+    {
+      "nr": 825,
+      "name": "Anlage WDVZ"
+    },
+    {
+      "nr": 901,
+      "name": "Einzelempfangsbekenntnis"
+    },
+    {
+      "nr": 902,
+      "name": "Postzustellungsurkunde (PZU)"
+    },
+    {
+      "nr": 904,
+      "name": "Fristverlängerung"
+    },
+    {
+      "nr": 907,
+      "name": "Einzel-Einzugsermächtigung"
+    },
+    {
+      "nr": 910,
+      "name": "Fax, unvollständig"
+    },
+    {
+      "nr": 917,
+      "name": "Antrag: Erteilung eines Prioritätsbelegs oder einer sonstigen Bescheinigung/Beglaubigung"
+    },
+    {
+      "nr": 919,
+      "name": "Verdienstausfallbescheinigung"
+    },
+    {
+      "nr": 922,
+      "name": "Antrag: DPMAdirektPro Adressverwendung"
+    },
+    {
+      "nr": 923,
+      "name": "Antrag: DPMAdirektPro Adressänderung"
+    },
+    {
+      "nr": 924,
+      "name": "Antrag: DPMAdirektPro Rücknahme Adressverwendung"
+    },
+    {
+      "nr": 944,
+      "name": "Eingangsdokument aus Digitalem Medium"
+    },
+    {
+      "nr": 946,
+      "name": "Sammelfehlerbeleg Digitales Medium"
+    },
+    {
+      "nr": 947,
+      "name": "Digitales Medium Rückläufer"
+    },
+    {
+      "nr": 948,
+      "name": "Fehlerhafte Mediendatei"
+    },
+    {
+      "nr": 949,
+      "name": "Mediendatei"
+    },
+    {
+      "nr": 950,
+      "name": "Modell mit Foto"
+    },
+    {
+      "nr": 952,
+      "name": "Digitales Medium"
+    },
+    {
+      "nr": 956,
+      "name": "Antrag: Entschädigung als Zeuge/Zeugin nach dem Justizvergütungs- und -entschädigungsgesetz (JVEG)"
+    },
+    {
+      "nr": 965,
+      "name": "Einzel-Avis"
+    },
+    {
+      "nr": 966,
+      "name": "Sammler-Avis"
+    },
+    {
+      "nr": 969,
+      "name": "SEPA-Mandat"
+    },
+    {
+      "nr": 970,
+      "name": "SEPA-Einzelverwendung"
+    },
+    {
+      "nr": 971,
+      "name": "SEPA-Sammlerverwendung"
+    },
+    {
+      "nr": 987,
+      "name": "Rückläufer DPMAdirektPro"
+    },
+    {
+      "nr": 993,
+      "name": "Deckblatt elektronischer Eingang"
+    },
+    {
+      "nr": 994,
+      "name": "DIZ-Auftrag: Neuscan"
+    },
+    {
+      "nr": 995,
+      "name": "Interner Hinweis"
+    },
+    {
+      "nr": 996,
+      "name": "Signaturprotokoll (elektr. Eingang)"
+    },
+    {
+      "nr": 997,
+      "name": "Sendeprotokoll (elektr. Eingang)"
+    },
+    {
+      "nr": 998,
+      "name": "Leerdokument"
+    },
+    {
+      "nr": 999,
+      "name": "Sonstiges"
+    }
+  ],
+  "zv": [
+    {
+      "nr": 200,
+      "name": "Sonstiges ZV"
+    },
+    {
+      "nr": 969,
+      "name": "SEPA-Mandat"
+    },
+    {
+      "nr": 970,
+      "name": "SEPA-Einzelverwendung"
+    },
+    {
+      "nr": 971,
+      "name": "SEPA-Sammlerverwendung"
+    },
+    {
+      "nr": 972,
+      "name": "SEPA-Mandat Widerruf"
+    },
+    {
+      "nr": 973,
+      "name": "SEPA-Verwendung Einzelwiderruf"
+    },
+    {
+      "nr": 975,
+      "name": "SEPA-Einzeldauerverwendung"
+    },
+    {
+      "nr": 976,
+      "name": "SEPA-Sammlerdauerverwendung"
+    },
+    {
+      "nr": 977,
+      "name": "SEPA-Verwendung Sammlerwiderruf"
+    },
+    {
+      "nr": 999,
+      "name": "Sonstiges"
+    }
+  ]
+}
