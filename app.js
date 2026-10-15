@@ -15,21 +15,13 @@ const state = {
 let DOKTYPEN = {};
 let DOKUMENTKATEGORIEN = [];
 
-const SCHUTZRECHT_MAP = {
-  marken: { key: 'marke', label: 'Marke' },
-  patente: { key: 'patgbm', label: 'Patente / Gebrauchsmuster' },
-  gebrauchsmuster: { key: 'patgbm', label: 'Patente / Gebrauchsmuster' },
-  designs: { key: 'designs', label: 'Design' },
-  zahlungsverkehr: { key: 'zv', label: 'Zahlungsverkehr' },
-};
+const SONSTIGE_KEY = '__ohne_unterverzeichnis__';
 const FACHSYSTEME = [
   { key: 'marke', label: 'Marke' },
   { key: 'patgbm', label: 'Patente / Gebrauchsmuster' },
   { key: 'designs', label: 'Design' },
   { key: 'zv', label: 'Zahlungsverkehr' },
 ];
-const GROUP_ORDER = ['marke', 'patgbm', 'designs', 'zv', 'sonstige'];
-const GROUP_LABELS = { marke: 'Marke', patgbm: 'Patente / Gebrauchsmuster', designs: 'Design', zv: 'Zahlungsverkehr', sonstige: 'Sonstige' };
 
 function escapeHtml(s) {
   return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -68,12 +60,14 @@ function updateDoktypOptions() {
 // ---------- Quellen ----------
 
 function detectGroup(relPath) {
+  // segments[0] = Name des gewählten Wurzelverzeichnisses, segments[1] = direktes
+  // Unterverzeichnis (eine Ebene), weitere Verschachtelung wird ignoriert.
   const segments = relPath.split('/');
-  for (const seg of segments) {
-    const hit = SCHUTZRECHT_MAP[seg.toLowerCase()];
-    if (hit) return hit;
+  if (segments.length > 2) {
+    const name = segments[1];
+    return { key: name, label: name };
   }
-  return { key: 'sonstige', label: 'Sonstige' };
+  return { key: SONSTIGE_KEY, label: 'Sonstige' };
 }
 
 async function handleDirPicked(fileList) {
@@ -121,16 +115,25 @@ async function renderQuellen() {
   const container = document.getElementById('quellenGroups');
   container.innerHTML = '';
   const groups = {};
-  for (const sf of state.sourceFiles) (groups[sf.group] ||= []).push(sf);
+  const labels = {};
+  for (const sf of state.sourceFiles) {
+    (groups[sf.group] ||= []).push(sf);
+    labels[sf.group] = sf.groupLabel;
+  }
 
-  for (const key of GROUP_ORDER) {
-    if (!groups[key] || !groups[key].length) continue;
+  const keys = Object.keys(groups).sort((a, b) => {
+    if (a === SONSTIGE_KEY) return 1;
+    if (b === SONSTIGE_KEY) return -1;
+    return labels[a].localeCompare(labels[b], 'de');
+  });
+
+  for (const key of keys) {
     const section = document.createElement('div');
     section.className = 'quellen-group';
     const collapsed = state.collapsedGroups.has(key);
     const h = document.createElement('div');
     h.className = 'quellen-group-title' + (collapsed ? ' collapsed' : '');
-    h.innerHTML = `<span class="chevron">&#9660;</span> ${GROUP_LABELS[key]} (${groups[key].length})`;
+    h.innerHTML = `<span class="chevron">&#9660;</span> ${escapeHtml(labels[key])} (${groups[key].length})`;
     section.appendChild(h);
     const grid = document.createElement('div');
     grid.className = 'quellen-grid' + (collapsed ? ' collapsed' : '');
