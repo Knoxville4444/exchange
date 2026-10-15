@@ -37,6 +37,12 @@ keine Admin-Rechte nötig). Empfohlen: **Firefox**. Chrome funktioniert ebenfall
 5. Die **Gliederung** links zeigt dieselbe Struktur als Baum zur schnellen Navigation.
 6. **Download** lädt das fertige PDF herunter, **Drucken** öffnet es in einem neuen Tab
    zum Ausdrucken über den Browser (z. B. als PDF-Drucker).
+7. Schalter **"Wie gescannt aussehen lassen"** in der Kopfzeile: rastert beim Export jede
+   Seite und legt leichtes Rauschen, Kontrast-/Helligkeitsschwankung, eine minimale
+   Schräglage (±0,5°) und eine dezente Vignette darüber – statt gestochen scharfer
+   Vektor-/Textseiten. Bewusst konservativ dosiert, damit QR- und Patch-Codes auf den
+   Trennblättern weiterhin zuverlässig lesbar bleiben. Erhöht die Dateigröße spürbar
+   (Rasterbilder statt Vektorinhalt) und dauert je nach Seitenzahl einige Sekunden.
 
 ## Struktur
 

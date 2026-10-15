@@ -12,6 +12,10 @@
   <span class="title">Testdokument-Generator</span>
   <div class="actions">
     <span class="status" id="status"></span>
+    <label class="scan-toggle" title="Seiten vor dem Export rastern und leicht verzerren (Rauschen, Schräglage, Kontrast) &ndash; wie ein echter Scan.">
+      <input type="checkbox" id="scanModeToggle">
+      Wie gescannt aussehen lassen
+    </label>
     <button id="btnHelp" title="Hilfe">?</button>
     <button id="btnDownload"><i class="icon">&#8595;</i> Download</button>
     <button id="btnPrint"><i class="icon">&#9113;</i> Drucken</button>
@@ -49,6 +53,10 @@
           springt zur jeweiligen Stelle im Streifen.</li>
         <li><strong>Download</strong> lädt das fertige PDF herunter, <strong>Drucken</strong> öffnet
           es in einem neuen Tab zum Ausdrucken über den Browser (z. B. als PDF-Drucker).</li>
+        <li><strong>"Wie gescannt aussehen lassen"</strong>: rastert beim Export jede Seite und legt
+          leichtes Rauschen, Kontrast-/Helligkeitsschwankung, minimale Schräglage und eine dezente
+          Vignette darüber. Bewusst dezent, damit QR-/Patch-Codes lesbar bleiben. Dauert je nach
+          Seitenzahl einige Sekunden und vergrößert die Datei.</li>
       </ol>
     </div>
   </div>

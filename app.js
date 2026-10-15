@@ -224,6 +224,11 @@ async function loadSourceDocForLib(fileId) {
   return doc;
 }
 
+async function loadSourcePdfJsDocForLib(fileId) {
+  const sf = state.sourceFiles.find((s) => s.id === fileId);
+  return loadPdfJsDoc(sf);
+}
+
 // ---------- Item-Verwaltung ----------
 
 function insertItems(newItems, atIndex) {
@@ -767,9 +772,14 @@ async function exportPdf() {
     );
     if (!ok) return null;
   }
+  const scanMode = document.getElementById('scanModeToggle').checked;
   setStatus('Erzeuge PDF…');
   try {
-    const bytes = await PdfGen.buildFinalPdf(state.items, loadSourceDocForLib);
+    const bytes = await PdfGen.buildFinalPdf(state.items, loadSourceDocForLib, {
+      scanMode,
+      loadSourcePdfJsDoc: loadSourcePdfJsDocForLib,
+      onProgress: (done, total) => setStatus(`Erzeuge PDF… (${done}/${total})`),
+    });
     renderStrip();
     return new Blob([bytes], { type: 'application/pdf' });
   } catch (err) {

@@ -203,29 +203,150 @@ async function addDummySeite(pdfDoc, { kind, pageLabel }) {
   return page;
 }
 
-async function buildFinalPdf(items, loadSourceDoc) {
-  const out = await PDFDocument.create();
-  for (const item of items) {
-    if (item.type === 'paket-trenn') {
-      await addPaketTrennblatt(out, { kategorie: item.kategorie });
-    } else if (item.type === 'dokument-trenn') {
-      await addDokumentTrennblatt(out, { doktyp: item.doktyp });
-    } else if (item.type === 'zbh') {
-      await addZbhBlatt(out);
-    } else if (item.type === 'seite') {
-      if (item.source.kind === 'generated') {
-        await addDummySeite(out, item.source.dummy);
-      } else if (item.source.kind === 'file') {
-        const srcDoc = await loadSourceDoc(item.source.fileId);
-        const [copied] = await out.copyPages(srcDoc, [item.source.pageIndex]);
-        out.addPage(copied);
-      }
-    } else if (item.type === 'seite-stapel') {
+async function addItemNormal(out, item, loadSourceDoc) {
+  if (item.type === 'paket-trenn') {
+    await addPaketTrennblatt(out, { kategorie: item.kategorie });
+  } else if (item.type === 'dokument-trenn') {
+    await addDokumentTrennblatt(out, { doktyp: item.doktyp });
+  } else if (item.type === 'zbh') {
+    await addZbhBlatt(out);
+  } else if (item.type === 'seite') {
+    if (item.source.kind === 'generated') {
+      await addDummySeite(out, item.source.dummy);
+    } else if (item.source.kind === 'file') {
       const srcDoc = await loadSourceDoc(item.source.fileId);
-      const indices = Array.from({ length: item.source.pageCount }, (_, i) => i);
-      const copiedPages = await out.copyPages(srcDoc, indices);
-      for (const p of copiedPages) out.addPage(p);
+      const [copied] = await out.copyPages(srcDoc, [item.source.pageIndex]);
+      out.addPage(copied);
     }
+  } else if (item.type === 'seite-stapel') {
+    const srcDoc = await loadSourceDoc(item.source.fileId);
+    const indices = Array.from({ length: item.source.pageCount }, (_, i) => i);
+    const copiedPages = await out.copyPages(srcDoc, indices);
+    for (const p of copiedPages) out.addPage(p);
+  }
+}
+
+function clamp255(v) {
+  return v < 0 ? 0 : v > 255 ? 255 : v;
+}
+
+function applyScannedLook(sourceCanvas) {
+  const w = sourceCanvas.width;
+  const h = sourceCanvas.height;
+
+  const angleDeg = Math.random() * 1.0 - 0.5; // +/- 0.5 Grad, QR-/Patch-Codes bleiben lesbar
+  const rotated = document.createElement('canvas');
+  rotated.width = w;
+  rotated.height = h;
+  const rctx = rotated.getContext('2d');
+  rctx.fillStyle = '#ffffff';
+  rctx.fillRect(0, 0, w, h);
+  rctx.translate(w / 2, h / 2);
+  rctx.rotate((angleDeg * Math.PI) / 180);
+  rctx.drawImage(sourceCanvas, -w / 2, -h / 2);
+
+  const filtered = document.createElement('canvas');
+  filtered.width = w;
+  filtered.height = h;
+  const fctx = filtered.getContext('2d');
+  const brightness = 0.97 + Math.random() * 0.08;
+  const contrast = 1.04 + Math.random() * 0.08;
+  fctx.filter = `blur(0.35px) brightness(${brightness}) contrast(${contrast}) saturate(0.92)`;
+  fctx.drawImage(rotated, 0, 0);
+  fctx.filter = 'none';
+
+  const imgData = fctx.getImageData(0, 0, w, h);
+  const data = imgData.data;
+  const noiseAmount = 9;
+  for (let i = 0; i < data.length; i += 4) {
+    const n = (Math.random() - 0.5) * noiseAmount;
+    data[i] = clamp255(data[i] + n);
+    data[i + 1] = clamp255(data[i + 1] + n);
+    data[i + 2] = clamp255(data[i + 2] + n);
+  }
+  fctx.putImageData(imgData, 0, 0);
+
+  const grad = fctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.35, w / 2, h / 2, Math.max(w, h) * 0.72);
+  grad.addColorStop(0, 'rgba(0,0,0,0)');
+  grad.addColorStop(1, 'rgba(0,0,0,0.1)');
+  fctx.globalCompositeOperation = 'multiply';
+  fctx.fillStyle = grad;
+  fctx.fillRect(0, 0, w, h);
+  fctx.globalCompositeOperation = 'source-over';
+
+  return filtered;
+}
+
+function dataUrlToBytes(dataUrl) {
+  const base64 = dataUrl.split(',')[1];
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+async function rasterizeAndEmbed(out, pdfjsDoc, pageNumber) {
+  const page = await pdfjsDoc.getPage(pageNumber);
+  const baseViewport = page.getViewport({ scale: 1 });
+  const scale = 1.8;
+  const viewport = page.getViewport({ scale });
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(viewport.width);
+  canvas.height = Math.round(viewport.height);
+  await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+  const processed = applyScannedLook(canvas);
+  const jpegBytes = dataUrlToBytes(processed.toDataURL('image/jpeg', 0.82));
+  const image = await out.embedJpg(jpegBytes);
+  const outPage = out.addPage([baseViewport.width, baseViewport.height]);
+  outPage.drawImage(image, { x: 0, y: 0, width: baseViewport.width, height: baseViewport.height });
+}
+
+async function addItemScanned(out, item, loadSourceDoc, loadSourcePdfJsDoc) {
+  if (item.type === 'seite-stapel') {
+    const pdfjsDoc = await loadSourcePdfJsDoc(item.source.fileId);
+    for (let i = 0; i < item.source.pageCount; i++) {
+      await rasterizeAndEmbed(out, pdfjsDoc, i + 1);
+    }
+    return;
+  }
+  if (item.type === 'seite' && item.source.kind === 'file') {
+    const pdfjsDoc = await loadSourcePdfJsDoc(item.source.fileId);
+    await rasterizeAndEmbed(out, pdfjsDoc, item.source.pageIndex + 1);
+    return;
+  }
+
+  const temp = await PDFDocument.create();
+  if (item.type === 'paket-trenn') {
+    await addPaketTrennblatt(temp, { kategorie: item.kategorie });
+  } else if (item.type === 'dokument-trenn') {
+    await addDokumentTrennblatt(temp, { doktyp: item.doktyp });
+  } else if (item.type === 'zbh') {
+    await addZbhBlatt(temp);
+  } else if (item.type === 'seite' && item.source.kind === 'generated') {
+    await addDummySeite(temp, item.source.dummy);
+  } else {
+    return;
+  }
+  const tempBytes = await temp.save();
+  const pdfjsDoc = await window.pdfjsLib.getDocument({ data: tempBytes }).promise;
+  await rasterizeAndEmbed(out, pdfjsDoc, 1);
+}
+
+async function buildFinalPdf(items, loadSourceDoc, options = {}) {
+  const { scanMode = false, loadSourcePdfJsDoc = null, onProgress = null } = options;
+  const out = await PDFDocument.create();
+  let done = 0;
+  for (const item of items) {
+    if (item.type === 'fehlend') {
+      // wird bewusst ausgelassen, Datei fehlt im Quellverzeichnis
+    } else if (scanMode) {
+      await addItemScanned(out, item, loadSourceDoc, loadSourcePdfJsDoc);
+    } else {
+      await addItemNormal(out, item, loadSourceDoc);
+    }
+    done++;
+    if (onProgress) onProgress(done, items.length);
   }
   return out.save();
 }

@@ -71,6 +71,16 @@ label {
 .topbar .title { font-size: 13px; color: var(--text-secondary); }
 .topbar .actions { display: flex; gap: 8px; align-items: center; }
 .topbar .status { font-size: 12px; color: var(--text-muted); margin-right: 4px; }
+.scan-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+.scan-toggle input { cursor: pointer; }
 
 .main {
   display: flex;
