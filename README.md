@@ -1,4 +1,4 @@
-# Testdokument-Generator
+# Teststapel-Erzeugung
 
 Erzeugt mehrseitige Test-PDFs für die Digitalisierungs-Anwendung – ohne echte Scandaten.
 Formulare aus einem lokalen Verzeichnis werden per Klick/Drag&Drop mit generierten
@@ -38,11 +38,13 @@ keine Admin-Rechte nötig). Empfohlen: **Firefox**. Chrome funktioniert ebenfall
 6. **Download** lädt das fertige PDF herunter, **Drucken** öffnet es in einem neuen Tab
    zum Ausdrucken über den Browser (z. B. als PDF-Drucker).
 7. Schalter **"Wie gescannt aussehen lassen"** in der Kopfzeile: rastert beim Export jede
-   Seite und legt leichtes Rauschen, Kontrast-/Helligkeitsschwankung, eine minimale
-   Schräglage (±0,5°) und eine dezente Vignette darüber – statt gestochen scharfer
-   Vektor-/Textseiten. Bewusst konservativ dosiert, damit QR- und Patch-Codes auf den
-   Trennblättern weiterhin zuverlässig lesbar bleiben. Erhöht die Dateigröße spürbar
-   (Rasterbilder statt Vektorinhalt) und dauert je nach Seitenzahl einige Sekunden.
+   Seite und legt Rauschen, Kontrast-/Helligkeitsschwankung, eine Schräglage (±3°), eine
+   ungleichmäßige Ausleuchtung (Vignette plus diagonaler Helligkeitsverlauf) sowie
+   einzelne, unregelmäßig verteilte Staubkörner/Kratzer darüber – statt gestochen
+   scharfer Vektor-/Textseiten. Die Stärke ist bewusst so gewählt, dass der Effekt klar
+   sichtbar ist, QR- und Patch-Codes auf den Trennblättern aber weiterhin zuverlässig
+   lesbar bleiben. Erhöht die Dateigröße spürbar (Rasterbilder statt Vektorinhalt) und
+   dauert je nach Seitenzahl einige Sekunden.
 
 ## Struktur
 

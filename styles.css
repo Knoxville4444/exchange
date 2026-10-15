@@ -241,7 +241,6 @@ label {
   cursor: pointer;
 }
 .item-card:hover .del-btn { display: block; }
-.item-card.drag-over { border-left: 2px solid var(--accent); }
 
 .insert-end {
   width: 20px;
@@ -252,6 +251,21 @@ label {
   cursor: pointer;
 }
 .insert-end.active { background: var(--accent-bg); border: 1.5px dashed var(--accent); }
+
+.drop-placeholder {
+  width: 78px;
+  aspect-ratio: 0.707;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 2px dashed var(--accent);
+  background: var(--accent-bg);
+  align-self: flex-end;
+  animation: drop-placeholder-pulse 1s ease-in-out infinite;
+}
+@keyframes drop-placeholder-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
 
 .side-panel {
   width: 320px;

@@ -11,6 +11,7 @@ const state = {
   nextId: 1,
   collapsedGroups: new Set(),
   favorites: [],
+  dragPlaceholderIndex: null,
 };
 
 const FAVORITES_STORAGE_KEY = 'scanhelper-favoriten';
@@ -293,6 +294,17 @@ function moveItem(id, beforeId) {
   renderTree();
 }
 
+function moveItemToIndex(id, toIndex) {
+  const fromIdx = state.items.findIndex((it) => it.id === id);
+  if (fromIdx === -1) return;
+  const [moved] = state.items.splice(fromIdx, 1);
+  let insertAt = fromIdx < toIndex ? toIndex - 1 : toIndex;
+  insertAt = Math.max(0, Math.min(state.items.length, insertAt));
+  state.items.splice(insertAt, 0, moved);
+  renderStrip();
+  renderTree();
+}
+
 // ---------- Favoriten ----------
 
 function itemsToInstructions(items) {
@@ -462,6 +474,34 @@ function renderFavoriten() {
 
 // ---------- Streifen (Strip) ----------
 
+function makeDropPlaceholder() {
+  const el = document.createElement('div');
+  el.className = 'drop-placeholder';
+  return el;
+}
+
+function getDropIndexFromPosition(clientX, clientY) {
+  const cardEls = [...document.querySelectorAll('#strip .item-card[data-id]')];
+  if (!cardEls.length) return 0;
+  const withRects = cardEls.map((el) => ({ el, rect: el.getBoundingClientRect() }));
+  const sameRow = withRects.filter((c) => clientY >= c.rect.top && clientY <= c.rect.bottom);
+  const candidates = sameRow.length ? sameRow : withRects;
+
+  let closest = null;
+  let closestDist = Infinity;
+  for (const c of candidates) {
+    const cx = c.rect.left + c.rect.width / 2;
+    const dist = Math.abs(clientX - cx);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closest = c;
+    }
+  }
+  const idx = state.items.findIndex((it) => it.id === closest.el.dataset.id);
+  const before = clientX < closest.rect.left + closest.rect.width / 2;
+  return before ? idx : idx + 1;
+}
+
 function makeCard(item) {
   const card = document.createElement('div');
   card.className = 'item-card';
@@ -512,24 +552,6 @@ function makeCard(item) {
 
   card.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/x-item-id', item.id);
-  });
-  card.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    card.classList.add('drag-over');
-  });
-  card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
-  card.addEventListener('drop', (e) => {
-    e.preventDefault();
-    card.classList.remove('drag-over');
-    const itemId = e.dataTransfer.getData('text/x-item-id');
-    const sourceFileId = e.dataTransfer.getData('text/x-source-file');
-    if (itemId) {
-      moveItem(itemId, item.id);
-    } else if (sourceFileId) {
-      const sf = state.sourceFiles.find((s) => s.id === sourceFileId);
-      const idx = state.items.findIndex((it) => it.id === item.id);
-      if (sf) addWholePdf(sf, idx);
-    }
   });
 
   if (state.insertIndex === state.items.findIndex((it) => it.id === item.id)) {
@@ -594,6 +616,7 @@ function renderStrip() {
   }
 
   for (let i = 0; i < state.items.length; i++) {
+    if (state.dragPlaceholderIndex === i) appendTarget.appendChild(makeDropPlaceholder());
     const item = state.items[i];
     if (item.type === 'paket-trenn') {
       const paketDiv = document.createElement('div');
@@ -636,23 +659,14 @@ function renderStrip() {
     }
   }
 
+  if (state.dragPlaceholderIndex === state.items.length) appendTarget.appendChild(makeDropPlaceholder());
+
   const endZone = document.createElement('div');
   endZone.className = 'insert-end';
   if (state.insertIndex === null) endZone.classList.add('active');
   endZone.addEventListener('click', () => {
     state.insertIndex = null;
     renderStrip();
-  });
-  endZone.addEventListener('dragover', (e) => e.preventDefault());
-  endZone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    const itemId = e.dataTransfer.getData('text/x-item-id');
-    const sourceFileId = e.dataTransfer.getData('text/x-source-file');
-    if (itemId) moveItem(itemId, null);
-    else if (sourceFileId) {
-      const sf = state.sourceFiles.find((s) => s.id === sourceFileId);
-      if (sf) addWholePdf(sf, null);
-    }
   });
   strip.appendChild(endZone);
 
@@ -874,6 +888,50 @@ for (const tab of document.querySelectorAll('.tab')) {
     document.getElementById('tab' + tab.dataset.tab.charAt(0).toUpperCase() + tab.dataset.tab.slice(1)).classList.add('active');
   });
 }
+
+// ---------- Streifen: Drag & Drop mit wanderndem Platzhalter ----------
+
+const stripEl = document.getElementById('strip');
+
+stripEl.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  const idx = getDropIndexFromPosition(e.clientX, e.clientY);
+  if (idx !== state.dragPlaceholderIndex) {
+    state.dragPlaceholderIndex = idx;
+    renderStrip();
+  }
+});
+
+stripEl.addEventListener('dragleave', (e) => {
+  if (!stripEl.contains(e.relatedTarget)) {
+    state.dragPlaceholderIndex = null;
+    renderStrip();
+  }
+});
+
+stripEl.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const idx = state.dragPlaceholderIndex !== null ? state.dragPlaceholderIndex : getDropIndexFromPosition(e.clientX, e.clientY);
+  state.dragPlaceholderIndex = null;
+  const itemId = e.dataTransfer.getData('text/x-item-id');
+  const sourceFileId = e.dataTransfer.getData('text/x-source-file');
+  if (itemId) {
+    moveItemToIndex(itemId, idx);
+  } else if (sourceFileId) {
+    const sf = state.sourceFiles.find((s) => s.id === sourceFileId);
+    if (sf) addWholePdf(sf, idx);
+    else renderStrip();
+  } else {
+    renderStrip();
+  }
+});
+
+document.addEventListener('dragend', () => {
+  if (state.dragPlaceholderIndex !== null) {
+    state.dragPlaceholderIndex = null;
+    renderStrip();
+  }
+});
 
 // ---------- Verzeichnis-Picker ----------
 
