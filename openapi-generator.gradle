@@ -1,0 +1,60 @@
+// =====================================================================================================================
+// Server-Stubs aus der OpenAPI erzeugen (API-first)
+//
+// Einbinden in <service>/build.gradle:
+//
+//   plugins {
+//       ...
+//       alias(libs.plugins.openapiGenerator)   // TODO: Alias im LibCatalog prüfen (Plugin-ID org.openapi.generator, getestet mit 7.27.0)
+//   }
+//   apply from: 'openapi-generator.gradle'
+//
+// Ergebnis: je Tag der OpenAPI ein Interface (KategorienApi, VorlagenApi, …) und die Modelle als Records (…Dto) unter
+// build/generated/openapi. Der generierte Code wird nicht committet und nicht von Hand angepasst; die Resources in
+// api.v1 implementieren die Interfaces.
+//
+// Laufzeit-Abhängigkeiten des generierten Codes (vermutlich vorhanden): spring-boot-starter-webmvc, spring-boot-starter-validation,
+// swagger-annotations (über springdoc), Jackson 3.
+// =====================================================================================================================
+
+def openApiAusgabe = layout.buildDirectory.dir('generated/openapi')
+
+openApiGenerate {
+    generatorName = 'spring'
+    library = 'spring-boot'
+    inputSpec = file('src/main/openapi/dokumentenerstellung-api.yaml').path
+    outputDir = openApiAusgabe.get().asFile.path
+    apiPackage = 'de.dpma.qd.service.dokumentenerstellung.api.v1'
+    modelPackage = 'de.dpma.qd.service.dokumentenerstellung.api.v1.model'
+    modelNameSuffix = 'Dto'
+    globalProperties = [
+            apis           : '',
+            models         : '',
+            supportingFiles: 'false',
+            apiDocs        : 'false',
+            modelDocs      : 'false',
+            apiTests       : 'false',
+            modelTests     : 'false'
+    ]
+    configOptions = [
+            useSpringBoot4                    : 'true',
+            useJackson3                       : 'true',
+            interfaceOnly                     : 'true',   // nur Interfaces + Modelle, keine Controller
+            useTags                           : 'true',   // ein Interface je Tag
+            skipDefaultInterface              : 'true',   // keine Default-Implementierungen (501)
+            requestMappingMode                : 'api_interface',
+            useResponseEntity                 : 'true',
+            useBeanValidation                 : 'true',
+            openApiNullable                   : 'false',
+            useRecords                        : 'true',
+            hideGenerationTimestamp           : 'true',
+            generateJsonIncludeAnnotations    : 'false',
+            generateJsonSetterNullsAnnotations: 'false'
+    ]
+}
+
+sourceSets.main.java.srcDir(openApiAusgabe.map { it.dir('src/main/java') })
+
+tasks.named('compileJava') {
+    dependsOn tasks.named('openApiGenerate')
+}

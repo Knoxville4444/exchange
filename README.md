@@ -1,52 +1,81 @@
 # Vorlagenverwaltung – Querschnittsdienst Dokumentenerstellung (QD10)
 
 Service- und API-Schicht für die **Verwaltung von Formularen, Bausteinen und Merkblättern**
-gemäß OpenAPI `dokumentenerstellung-api.yaml` (v0.3.x). Die eigentliche Dokumenterzeugung
-(LibreOffice) ist **nicht** Teil dieses Codes. Sie holt sich die Vorlagen über die Nahtstelle
-`VorlagenAufloesung` (siehe unten).
+gemäß OpenAPI `src/main/openapi/dokumentenerstellung-api.yaml` (0.4.0-SNAPSHOT). Die eigentliche
+Dokumenterzeugung (LibreOffice) gehört **nicht** dazu. Sie holt sich die Vorlagen über
+`VorlagenAufloesungService` (siehe unten).
 
 Zielplattform: Java 25, Spring Boot 4.1, Spring Data JPA (Hibernate 7), Flyway, Oracle.
+Aufbau nach `AGENTS.md` als **einfacher Dienst**: Resource → Service → Repository, ohne Ports,
+Adapter oder Aggregate.
 
 ## Struktur
 
 ```
-de.dpma.qd.service.dokumentenerstellung.verwaltung
-├── domain           reines Java: Wertobjekte, Aggregat Vorlage/Version, Regeln, Fehler
-│   └── fehler       FachlicherFehler → NichtGefunden (404), Konflikt (409), UngueltigeAnfrage (400), NichtUnterstuetzterInhalt (415)
-├── service          Anwendungsfälle (Transaktionsgrenze), Ansichten, Anträge
-│   ├── port         Ports: VorlagenRepository, KategorieRepository, InhaltSpeicher, AktuellerBenutzer
-│   ├── inhalt       ODT-/PDF-/XSD-Prüfung, Erkennen der Baustein-Bereiche (nur JDK)
-│   └── aufloesung   ★ Nahtstelle zur Erzeugung: VorlagenAufloesung
-├── persistence      JPA-Entities, Spring-Data-Repositories, Adapter, Inhalte als BLOB
-├── api              Skizze: Controller, DTOs, Fehlerbehandlung, Benutzer aus JWT
-└── konfiguration    Clock-Bean
+de.dpma.qd.service.dokumentenerstellung
+├── api.v1             Resources (implementieren die generierten Interfaces), Inbound-/OutboundApiMapper,
+│                      VorlagenExceptionHandler, Rollen
+│   └── model          generiert aus der OpenAPI (*Dto), liegt unter build/generated/openapi
+└── impl               Services, Fachobjekte als Records, Regeln (BausteinPruefung, InhaltPruefung)
+    └── persistence    Entities, Spring-Data-Repositories, EntityMapper, VorlagenSuche (Specification)
 ```
 
-Die Trennung erfolgt per Paket, `ArchitekturTest` (ArchUnit) prüft sie:
-`api → service ← persistence`, `domain` hängt von nichts ab, `service` kennt weder JPA noch Web.
+- Die Services rufen Repository und EntityMapper **direkt** auf. Eine Zwischenschicht gibt es nicht.
+- Fachliche Fehler sind eine einzige Klasse `FachlicherFehler` mit `Art` (NICHT_GEFUNDEN → 404,
+  KONFLIKT → 409, UNGUELTIG → 400, FORMAT_NICHT_UNTERSTUETZT → 415) und einer `errorId`.
+- Eine eigene Architekturprüfung ist nicht enthalten. Die übernimmt die ArchUnit-Lib des Projekts (OP-03).
+
+## API-first: Generierung der Server-Stubs
+
+Die OpenAPI ist führend. `openapi-generator.gradle` (openapi-generator 7.27.0, Generator `spring`) erzeugt
+daraus je Tag ein Interface (`KategorienApi`, `VorlagenApi`, `VersionenApi`, `VersionsinhalteApi`,
+`VeroeffentlichungApi`, `AbrufApi`, `ErzeugungApi`) sowie die Modelle als Records mit Suffix `Dto`.
+Wichtige Optionen: `interfaceOnly`, `useSpringBoot4`, `useJackson3`, `useTags`, `skipDefaultInterface`,
+`requestMappingMode=api_interface`, `openApiNullable=false`.
+
+Einbinden in `build.gradle`:
+
+```groovy
+plugins {
+    alias(libs.plugins.openapiGenerator)   // TODO: Alias im LibCatalog prüfen
+}
+apply from: 'openapi-generator.gradle'
+```
+
+Der generierte Code landet unter `build/generated/openapi` und wird **nicht** eingecheckt. `compileJava`
+hängt von `openApiGenerate` ab.
+
+Rollen stehen je Operation als `x-rollen` in der OpenAPI und zusätzlich als `@Secured(Rollen.…)` an den
+Resource-Methoden. Der Generator wertet `x-rollen` nicht aus. Beides muss also von Hand synchron bleiben.
+
+| Rolle | Darf |
+|---|---|
+| `formular_nutzer` | Erzeugung, Konvertierung, Merkblatt abrufen, Version auflösen |
+| `formular_verwaltung` | Kategorien, Vorlagen, Versionen, Inhalte, Veröffentlichung, Vorschau |
+
+`ErzeugungApi` (Erzeugung, Konvertierung, Vorschau) implementiert der Kollege, der die Erzeugung baut.
 
 ## Fachliche Regeln im Code
 
 | Regel | Ort |
 |---|---|
-| Versionsnummern vergibt der Service (HAUPT → `n.0`, NEBEN → `n.m+1`, auch für ältere Hauptversionen) | `Vorlage.planeNeueVersion` |
+| Versionsnummern vergibt der Service (HAUPT → `n.0`, NEBEN → `n.m+1`, auch für ältere Hauptversionen) | `VersionService.legeAn` |
 | Neue Version ohne Upload = Kopie von Inhalt, Schema und Bausteinen der Basisversion | `VersionService.legeAn` |
-| Nebenversionen übernehmen das Schema der Hauptversion; Schema nur änderbar, solange die Hauptversion nie freigegeben war | `Vorlage.ersetzeSchema` |
-| Effektiver Status wird aus Status und Zeitraum **berechnet**, es gibt keinen Scheduler | `Version.effektiverStatus` |
-| Veröffentlichen, planen, verschieben, absagen, zurückziehen; `ab` nie in der Vergangenheit | `Vorlage.setzeVeroeffentlichung` |
-| Vorlagen-Zeitraum: Änderungen wirken nur in die Zukunft (Vergangenheit bleibt rekonstruierbar) | `Zeitraum.gleicheVergangenheit` |
+| Nebenversionen übernehmen das Schema der Hauptversion. Es ist nur änderbar, solange keine Version der Hauptversion freigegeben war | `VersionService.ersetzeSchema` |
+| Der effektive Status wird aus Status und Zeitraum **berechnet**. Einen Scheduler gibt es nicht | `Version.effektiverStatus` |
+| Veröffentlichen, planen, verschieben, absagen und zurückziehen. `ab` liegt nie in der Vergangenheit | `VeroeffentlichungService` |
+| Beim Vorlagen-Zeitraum wirken Änderungen nur in die Zukunft | `Zeitraum.gleicheVergangenheit` |
 | Auflösung: höchste veröffentlichte passende Version zum Stichtag, Rückfall bei Rückzug | `Vorlage.loese` |
-| Bausteine: Bereich `baustein:KAT/Name` im ODT (auch in Kopf-/Fußzeilen); neue Referenz → höchste Hauptversion | `InhaltPruefung`, `BausteinPruefung.gleicheAb` |
-| Formular nur veröffentlichbar, wenn alle Bausteine im gesamten Nutzungszeitraum auflösbar sind | `BausteinPruefung.pruefeFormularVersion` |
-| Baustein-Rückzug, -Absage oder -Zeitraum wird abgelehnt, wenn ein geplantes oder veröffentlichtes Formular ihn danach nicht mehr auflösen kann | `BausteinPruefung.pruefeBausteinAenderung` |
-| Löschen nur für nie freigegebene Vorlagen bzw. Versionen; Bausteine nur ohne Referenzen | `VorlagenService`, `VersionService` |
+| Bausteine sind Bereiche `baustein:KAT/Name` im ODT, auch in Kopf- und Fußzeilen. Eine neue Referenz zeigt auf die höchste Hauptversion | `InhaltPruefung`, `BausteinPruefung.gleicheAb` |
+| Ein Formular ist nur veröffentlichbar, wenn alle Bausteine im gesamten Nutzungszeitraum auflösbar sind | `BausteinPruefung.pruefeFormularVersion` |
+| Rückzug, Absage oder Zeitraumänderung eines Bausteins wird abgelehnt, wenn ein Formular ihn danach nicht mehr auflösen kann | `BausteinPruefung.pruefeBausteinAenderung` |
+| Löschen geht nur bei nie freigegebenen Vorlagen bzw. Versionen, Bausteine zusätzlich nur ohne Referenzen | `VorlagenService`, `VersionService` |
+| Gleichzeitiges Veröffentlichen von Formular und Baustein wird über eine Sperre auf der Vorlage serialisiert | `VorlageRepository.findeZumAendern` |
 
 ## Nahtstelle zur Erzeugung
 
 ```java
-@Autowired VorlagenAufloesung aufloesung;
-
-AufgeloesteVorlage v = aufloesung.loese("PATGBM", "Bescheid",
+AufgeloesteVorlage v = vorlagenAufloesungService.loese("PATGBM", "Bescheid",
         VersionsAngabe.parseOptional(versionParam).orElse(null),   // "2", "2.3" oder null
         stichtagParam,                                              // null = jetzt
         VorlagenTyp.FORMULAR);
@@ -59,12 +88,12 @@ v.bausteinHeader();    // → Header X-Formular-Bausteine
 ```
 
 Die Erzeugung setzt den Inhalt jedes Baustein-ODT in den gleichnamigen Bereich des Formulars ein
-und befüllt **danach** die Variablen. Für die Vorschau (auch für Entwürfe) gibt es
+und befüllt **danach** die Variablen. Für die Vorschau, auch von Entwürfen, gibt es
 `loeseFuerVorschau(kategorie, name, version, bausteinEntwuerfe, stichtag)`.
 
 ## Einbindung ins Projekt
 
-Benötigte Abhängigkeiten (vermutlich größtenteils vorhanden; die Starter-Namen für Boot 4 bitte gegen das Projekt prüfen):
+Benötigte Abhängigkeiten, vermutlich größtenteils schon vorhanden (die Starter-Namen für Boot 4 bitte gegen das Projekt prüfen):
 
 ```groovy
 implementation 'org.springframework.boot:spring-boot-starter-webmvc'
@@ -73,8 +102,6 @@ implementation 'org.springframework.boot:spring-boot-starter-flyway'
 implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 implementation 'org.flywaydb:flyway-database-oracle'
 runtimeOnly    'com.oracle.database.jdbc:ojdbc11'
-testImplementation 'org.springframework.boot:spring-boot-starter-test'
-testImplementation 'com.tngtech.archunit:archunit-junit5'
 ```
 
 Konfiguration (Auszug):
@@ -85,7 +112,7 @@ spring:
     hibernate.ddl-auto: validate
     open-in-view: false
     properties:
-      hibernate.default_batch_fetch_size: 50   # vermeidet N+1 beim Laden von Versionen/Bausteinen
+      hibernate.default_batch_fetch_size: 50
       hibernate.jdbc.time_zone: UTC
   servlet.multipart:
     max-file-size: 20MB
@@ -93,21 +120,21 @@ spring:
 ```
 
 Weitere Voraussetzungen:
-- **Method Security** muss aktiv sein (`@EnableMethodSecurity`), damit die `@PreAuthorize`-Prüfungen der Controller greifen.
-- **Scan:** Liegt die `@SpringBootApplication` in `de.dpma.qd.service.dokumentenerstellung` oder darüber, werden Entities, Repositories und Komponenten automatisch gefunden.
-- **Flyway:** Die Migrationsnummer `V1__…` an die bestehenden Migrationen anpassen.
+- **Method Security** mit `@EnableMethodSecurity(securedEnabled = true)`, sonst greifen die `@Secured`-Annotationen nicht.
+- **Flyway:** `V1.0.0__Initialcreate.sql` enthält nur DDL und keine Oracle-Storage-Klauseln. Ob `ddl-auto=validate` damit durchläuft, muss ein Mensch gegen eine echte Oracle prüfen.
 
 ## Stand der Verifikation
 
-- **Domäne und Service:** kompiliert, **67 Unit-Tests grün** (Domänenregeln, Baustein-Prüfungen, ODT/XSD-Prüfung, durchgängige Szenarien über alle Services mit In-Memory-Adaptern). Die Szenarien liegen in `src/test/java/.../service/VerwaltungSzenarioTest.java`.
-- **Persistenz und API:** nur gegen nachgebaute API-Signaturen kompiliert (die Entwicklungsumgebung hatte keinen Zugriff auf Maven Central). **Beim ersten Bauen im Projekt prüfen**, vor allem die Spring-Boot-4-Starter, `Specification`, Multipart-Bindung und die Hibernate-Abbildung `Instant` → `TIMESTAMP WITH TIME ZONE`.
-- **`ArchitekturTest`** ist geschrieben, wurde aber mangels ArchUnit nicht ausgeführt.
+- **Generierung:** Der Generator lief gegen die OpenAPI. Der Main-Code inklusive aller Resources kompiliert gegen die generierten Interfaces und Modelle, die Signaturen passen also.
+- **Fachlogik und Services:** **86 Unit-Tests grün.** Das betrifft Fachobjekte, Baustein- und ODT/XSD-Prüfung sowie alle Services mit gemockten Repositories.
+- **Nicht gegen echtes Spring/Hibernate gelaufen:** Die Entwicklungsumgebung hatte keinen Zugriff auf Maven Central. Kompiliert wurde gegen nachgebaute Signaturen. **Beim ersten Bauen im Projekt prüfen:** Boot-4-Starter, `Specification`, Multipart-Bindung (insbesondere `tags` als Liste), Hibernate-Abbildung `Instant` → `TIMESTAMP WITH TIME ZONE` und `ddl-auto=validate`.
+- Der generierte Code nutzt `org.springframework.lang.Nullable`. In Spring 7 ist das deprecated (JSpecify), funktioniert aber.
 
 ## Bewusst offen
 
-- Mandantenfähigkeit bzw. Autorisierung je Fachsystem: Aktuell gibt es nur `SCOPE_formular-verwaltung` und `SCOPE_formular-public`.
-- Fachsystemübergreifende Bausteine: technisch bereits möglich, da Referenzen `KATEGORIE/Name` enthalten. Die fachliche Regel ist noch offen.
-- API-Skizze: Die Controller sind handgeschrieben. In der Umsetzung implementieren sie die generierten Interfaces, und die `Dtos` entfallen.
-- Optimistisches Locking über HTTP (`ETag`/`If-Match`): Die `revision` liegt bereits im Aggregat.
-- Aufräumen unreferenzierter Inhalte (z. B. nach gelöschten Entwürfen) als Betriebsjob.
-- Vorschau-Endpunkt: gehört zur Erzeugung und nutzt `loeseFuerVorschau`.
+- Fehlerformat (`RestErrorInfoDto`) und `errorId`-Katalog: siehe TODO OP-04 im `VorlagenExceptionHandler`.
+- Autorisierung je Fachsystem bzw. Kategorie: Aktuell gibt es nur die zwei Rollen.
+- Fachsystemübergreifende Bausteine: technisch schon möglich, da Referenzen `KATEGORIE/Name` enthalten. Die fachliche Regel fehlt noch.
+- Optimistisches Locking über HTTP (`ETag`/`If-Match`).
+- Aufräumen unreferenzierter Inhalte als Betriebsjob, z. B. nach gelöschten Entwürfen.
+- Generator-Bug: Ein Multipart-Array mit `uniqueItems` erzeugt ein `Set` ohne Import. Deshalb ist `tags` in `VorlageCreateRequest` eine Liste.
