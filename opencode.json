@@ -1,0 +1,57 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*secrets/*": "deny"
+    },
+    "edit": {
+      "*": "allow",
+      "*dependencies.gradle": "ask",
+      "*build.gradle": "ask",
+      "*settings.gradle": "ask",
+      "*application.yml": "ask",
+      "*application-template.yml": "ask",
+      "*ci.yml": "ask",
+      "*db/migration/*": "ask",
+      "*.gitlab-ci.yml": "deny",
+      "*gradle.properties": "deny",
+      "build/*": "deny",
+      "*/build/*": "deny",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*secrets/*": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "gradlew build*": "allow",
+      "gradlew assemble*": "allow",
+      "gradlew test*": "allow",
+      "gradlew check*": "allow",
+      "gradlew dependencies*": "allow",
+      "gradlew generateMetadataFileForJavaComponentsPublication*": "allow",
+      "gradlew generatePomFileForJavaComponentsPublication*": "allow",
+      "gradlew publish*": "deny",
+      "gradlew wrapper*": "deny",
+      "./gradlew *": "deny",
+      "gradle *": "deny",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git show*": "allow",
+      "git branch": "allow",
+      "git push*": "deny",
+      "git tag*": "deny",
+      "git rebase*": "deny",
+      "git reset --hard*": "deny",
+      "git clean*": "deny",
+      "curl -fsS https://NEXUS_HOST/repository/RELEASE_REPO/*": "allow",
+      "curl -fsS https://NEXUS_HOST/repository/SNAPSHOT_REPO/*": "allow"
+    },
+    "webfetch": "ask",
+    "external_directory": "ask",
+    "doom_loop": "ask"
+  }
+}

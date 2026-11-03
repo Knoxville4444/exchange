@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gradlew build:*)",
+      "Bash(gradlew assemble:*)",
+      "Bash(gradlew test:*)",
+      "Bash(gradlew check:*)",
+      "Bash(gradlew dependencies:*)",
+      "Bash(gradlew generateMetadataFileForJavaComponentsPublication:*)",
+      "Bash(gradlew generatePomFileForJavaComponentsPublication:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(curl -fsS https://NEXUS_HOST/repository/RELEASE_REPO/:*)",
+      "Bash(curl -fsS https://NEXUS_HOST/repository/SNAPSHOT_REPO/:*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git mv:*)",
+      "Edit(**/dependencies.gradle)",
+      "Edit(**/build.gradle)",
+      "Edit(**/settings.gradle)",
+      "Edit(**/application.yml)",
+      "Edit(**/application-template.yml)",
+      "Edit(**/ci.yml)",
+      "Edit(**/db/migration/**)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git tag:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(gradlew publish:*)",
+      "Bash(gradlew wrapper:*)",
+      "Bash(./gradlew:*)",
+      "Edit(**/.gitlab-ci.yml)",
+      "Edit(**/gradle.properties)",
+      "Edit(**/build/**)",
+      "Read(**/*.env)",
+      "Read(**/*.env.*)",
+      "Read(**/secrets/**)"
+    ]
+  }
+}
